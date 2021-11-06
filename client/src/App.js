@@ -20,9 +20,6 @@ const App = () => {
   })
 
   async function validateToken(token)
-{
-
-  if(token)
   {
     const opts = 
     {
@@ -32,13 +29,14 @@ const App = () => {
         }
     }
 
-      const response = await fetch('http://localhost:5000/validate', opts)
-      let data = await response.json()
-      data['token']=token
-      dispatch(setUserInfo( data))
-      console.log(data)
-      setView('home')
-  }
+    const response = await fetch('http://localhost:5000/validate', opts)
+    if(response['status']!=200) return //Token aint valid
+    let data = await response.json()
+
+    data['token']=token
+    dispatch(setUserInfo( data))
+    console.log(data)
+    setView('home')
 }
 
   return (

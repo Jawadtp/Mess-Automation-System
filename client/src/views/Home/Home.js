@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-
+import './Home.css'
 const Home = () => 
 {
 
@@ -8,7 +8,7 @@ const Home = () =>
     return (
         <div>
             Hi {user['name']}
-            
+
         </div>
     )
 }
