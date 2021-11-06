@@ -1,7 +1,20 @@
 import {BsHouseFill,BsFillPersonFill,BsFillInfoCircleFill,BsBoxArrowRight} from 'react-icons/bs'
-import './sidebar.css'
+import './Sidebar.css'
 
-function Sidebar(props) {
+
+const Sidebar = (props) => 
+{
+
+    function onNavLinkClick(linkName)
+    {
+        if(linkName==='logout')
+        {
+            localStorage.removeItem('token')
+            window.location.reload()
+        }
+        props.setView(linkName)
+    }
+
     return(
         <div class="sidebar">
             <ul class="sidebar-list">
@@ -10,28 +23,28 @@ function Sidebar(props) {
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" style={{'color':'white'}} >
+                    <button className="navBtn" style={{'color':'white'}} onClick={() => onNavLinkClick('dashboard')} >
                         <BsHouseFill className='icon'/>
                         <span class="link-text">Home</span>
-                    </a>
+                    </button>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" style={{'color':'white'}}>
+                    <button class="navBtn" style={{'color':'white'}} onClick={() => onNavLinkClick('account')}>
                         <BsFillPersonFill className='icon'/>
                         <span class="link-text">Account</span>
-                    </a>
+                    </button>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" className="nav-link" style={{'color':'white'}}>
+                    <button className="navBtn" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
                         <BsFillInfoCircleFill className='icon' />
                         <span class="link-text">Info</span>
-                    </a>
+                    </button>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link" style={{'color':'white'}} >
+                    <a href="#" class="nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('logout')}>
                         <BsBoxArrowRight className='icon' />
                         <span class="link-text logout">Logout</span>
                     </a>
@@ -42,3 +55,5 @@ function Sidebar(props) {
 }
 
 export default Sidebar
+
+
