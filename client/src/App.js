@@ -5,7 +5,6 @@ import {useState, useEffect} from 'react'
 import { setUserInfo} from './features/user'
 import { useDispatch } from 'react-redux';
 
-
 const App = () => {
 
   const dispatch = useDispatch()
