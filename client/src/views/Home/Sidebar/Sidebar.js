@@ -11,6 +11,7 @@ const Sidebar = (props) =>
         {
             localStorage.removeItem('token')
             window.location.reload()
+            return
         }
         props.setView(linkName)
     }
@@ -23,21 +24,22 @@ const Sidebar = (props) =>
                 </li>
 
                 <li class="nav-item">
-                    <button className="navBtn" style={{'color':'white'}} onClick={() => onNavLinkClick('dashboard')} >
-                        <BsHouseFill className='icon'/>
-                        <span class="link-text">Home</span>
+                    <button className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('dashboard')} >
+                            <BsHouseFill className='icon'/>
+                            <span class="link-text">Home</span>
                     </button>
                 </li>
 
                 <li class="nav-item">
-                    <button class="navBtn" style={{'color':'white'}} onClick={() => onNavLinkClick('account')}>
+                    <button class="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('account')}>
                         <BsFillPersonFill className='icon'/>
                         <span class="link-text">Account</span>
                     </button>
                 </li>
 
                 <li class="nav-item">
-                    <button className="navBtn" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
+                    <button className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
+
                         <BsFillInfoCircleFill className='icon' />
                         <span class="link-text">Info</span>
                     </button>
