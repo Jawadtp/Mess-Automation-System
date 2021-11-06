@@ -1,7 +1,8 @@
+import getpass
 import psycopg2
 from datetime import datetime, timezone
 
-conn = psycopg2.connect("dbname=mess user=Jawadtp")
+conn = psycopg2.connect(f"dbname=mess user={getpass.getuser()}")
 
 
 def getUserInfoFromEmail(email):

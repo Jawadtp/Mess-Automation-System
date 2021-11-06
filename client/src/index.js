@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Sidebar from './sidebar';
 import reportWebVitals from './reportWebVitals';
 import {configureStore} from "@reduxjs/toolkit"
 import {Provider} from 'react-redux'
@@ -22,6 +23,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store = {store}>
+        <Sidebar />
         <App />
       </Provider>
     </BrowserRouter>
