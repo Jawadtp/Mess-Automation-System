@@ -1,4 +1,4 @@
-.loginFormWrapper
+/* .loginFormWrapper
 {
     padding: 100px;
 }
@@ -6,4 +6,60 @@
 #submitBtn
 {
     margin-top: 15px;
+} */
+
+body,html{
+    background: linear-gradient(0deg, #124b96, #414EBE);
+    height: 100%;
+}
+.contact-form{
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.233);
+    background: white;
+    border-radius: 30px;
+}
+.contact-form .form-control{
+    border-radius:1rem;
+    margin-bottom:10px;
+}
+
+.contact-form form{
+    padding: 5% 5% 10px;
+    /* margin-bottom:30px ; */
+}
+
+.contact-form h2{
+    font-weight: 900;
+    font-size: calc(2rem + 0.9vw);
+    margin-bottom: 2%;
+    margin-top: 10%;
+    text-align: center;
+    color: black;
+}
+
+input[type=password],
+input[type=text]
+{
+    border: 2px solid black;
+}
+
+#submitBtn{
+    background-color: #244ca5;
+    margin: 2rem 0;
+    width: 25%;
+    border-radius: 30px;
+}
+
+
+/* .form-floating .form-control{
+    height: fit-content;
+} */
+
+p span{
+    text-decoration: none;
+    color: rgb(165, 211, 252);
+}
+
+p span:hover{
+    cursor: pointer;
+    color: rgb(0, 0, 0);
 }
