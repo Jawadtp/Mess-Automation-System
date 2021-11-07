@@ -23,7 +23,7 @@ const Sidebar = (props) =>
                     <p class='logo'>MESS</p>
                 </li>
 
-                <li class="nav-item">
+                <li class={`nav-item ${props.view==='dashboard'?'selected':''}`}>
                     <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('dashboard')} >
                             <BsHouseFill className='icon'/>
                             <span class="link-text">Home</span>
@@ -31,14 +31,14 @@ const Sidebar = (props) =>
                     
                 </li>
 
-                <li class="nav-item">
+                <li class={`nav-item ${props.view==='details'?'selected':''}`}>
                     <a class="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('details')}>
                         <BsFillPersonFill className='icon'/>
                         <span class="link-text">Details</span>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class={`nav-item ${props.view==='info'?'selected':''}`}>
                     <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
 
                         <BsFillInfoCircleFill className='icon' />

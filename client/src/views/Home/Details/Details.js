@@ -27,6 +27,7 @@ const Details = () =>
                 )
         return ''
     }
+
     function dayMeals(day)
     {
         if(day.length)
@@ -79,7 +80,11 @@ const Details = () =>
 
     return (
         <div className="detailsWrapper">
-            {details.length==0?'Loading':
+            {user['messname']===''?'You are not registered to any mess currently.':
+            <div className="messName">
+                You are registered to mess {user['messname']} 
+            </div>}
+            {details.length==0?'':
              details.map((day)=> dayMeals(day))
             }
         </div>

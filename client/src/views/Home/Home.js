@@ -25,7 +25,7 @@ const Home = () =>
     return (
 
         <div className="homeWrapper">
-            <Sidebar setView={setView}/>
+            <Sidebar view={view} setView={setView}/>
             <div className="homeContent">
                 {renderView(view)}
             </div>

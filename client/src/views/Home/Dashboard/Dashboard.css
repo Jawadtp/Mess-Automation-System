@@ -11,3 +11,45 @@
     border-radius: 5px;
     display: inline-block;
 }
+
+
+.annMessage
+{
+    display: inline-block;
+    margin: 5px 10px;
+    border: 1px dotted black;
+    border-radius: 5px;
+    padding: 5px;
+}
+.annAuthor
+{
+    display: inline;
+}
+
+.annRole
+{
+    display: inline;
+    margin-left: 10px;
+    border: 1px blue solid;
+    padding: 1px;
+    border-radius: 5px;
+    font-size: small;
+    font-weight: 500;
+}
+
+.annWrapper
+{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 8px;
+    margin-top: 20px;
+    margin-left: 10px;
+    max-width: 700px;
+}
+
+.annTitle
+{
+    margin-left: 10px;
+    font-size: large;
+    font-weight: 500;
+}
