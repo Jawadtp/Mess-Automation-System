@@ -48,7 +48,7 @@ const Sidebar = (props) =>
 
                 <li className="nav-item">
                     <a href="#" class="nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('logout')}>
-                        <BsBoxArrowRight className='icon' />
+                        <i class="bi bi-box-arrow-right"></i>
                         <span class="link-text logout">Logout</span>
                     </a>
                 </li>
