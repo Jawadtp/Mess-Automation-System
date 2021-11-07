@@ -1,26 +1,63 @@
 .dashboardWrapper
 {
-    padding: 10px;
+    padding-left: 10px;
 }
 
-.userInfo
+.header{
+    padding-top: 1.25rem;
+    margin-bottom: 5rem;
+    width: 100%;
+}
+
+.bi{
+    font-size: 1.5rem;
+}
+
+.info{
+    width: 100%;
+}
+
+.userInfo,.dummyInfo
 {
-    margin: 10px;
-    border: 1px solid black;
-    padding: 8px;
-    border-radius: 5px;
-    display: inline-block;
+    margin: 1rem;
+    background-color: white;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+    padding: 3rem;
+    border-radius: 3px;
 }
 
+.secondDummyInfo{
+    margin: 1rem;
+}
 
-.annMessage
+.test{
+    height: 50%;
+    background-color: white;
+    margin:.25rem;
+    padding: 1rem;
+    border-radius: 3px;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+}
+
+.name{
+    color: #00306f;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.announcement{
+    width: 100%;
+}
+
+.annWrapper
 {
-    display: inline-block;
-    margin: 5px 10px;
-    border: 1px dotted black;
-    border-radius: 5px;
-    padding: 5px;
+    margin: 1rem;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+    padding:3rem;
 }
+
 .annAuthor
 {
     display: inline;
@@ -35,16 +72,6 @@
     border-radius: 5px;
     font-size: small;
     font-weight: 500;
-}
-
-.annWrapper
-{
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 8px;
-    margin-top: 20px;
-    margin-left: 10px;
-    max-width: 700px;
 }
 
 .annTitle

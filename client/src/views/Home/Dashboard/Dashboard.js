@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import './Dashboard.css'
 
 const Dashboard = () => 
@@ -48,28 +50,67 @@ const Dashboard = () =>
 
     return (
         <div className="dashboardWrapper">
-            <div className="userInfo">
-                <div className="rollno">
-                    {user['name']}
+            <div className='header row justify-content-around text-center'>
+                <div className='col-2'>
+                    TEST
                 </div>
-                <div className="rollno">
-                    {user['rollno']}
-                </div>
-                <div className="rollno">
-                    {user['email']}
-                </div>
-                <div className="rollno">
-                    {user['messname']===''?'Not registered to any mess':'Registered mess: ' + user['messname']}
 
+                <div className='col-2'>
+                    <i className='bi bi-calendar-month'></i>
                 </div>
+
+                <div className='col-2'>
+                    <div className='row justify-content-end'>
+                        <div className='px-1 col-1'>
+                            <i className='bi bi-bell'></i>
+                        </div>
+                        <div className='col-1'>
+                            <i className='bi bi-person'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className='row info'>
+                <div className="col-3 userInfo text-center">
+                    <div className="name">
+                        {user['name']}
+                    </div>
+                    <div className="rollno">
+                        {user['rollno']}
+                    </div>
+                    <div className="email">
+                        {user['email']}
+                    </div>
+                    <div className="mess">
+                        {user['messname']===''?'Not registered to any mess':'Registered mess: ' + user['messname']}
+                    </div>
+                </div>
+
+                <div className='col-3 dummyInfo'>
+                    DUMMY
+                </div>
+
+                <div className='col-3 text-center justify-content-center secondDummyInfo d-flex flex-column'>
+                    <div className='test'>
+                        TEST
+                    </div>
+                    <div className='test'>
+                        TEST
+                    </div>
+                </div>
+
             </div>
             
-            <div className="annWrapper">
-                <div className="annTitle">
-                    Announcements
+            <div className="row announcement">
+                <div className='col-6 annWrapper'>
+                    <div className="annTitle">
+                        Announcements
+                    </div>
+                    {announcements.map((announcement) => displayAnnouncement(announcement))}
+
                 </div>
-                {announcements.map((announcement) => displayAnnouncement(announcement))}
-            </div>
+            </div> 
         </div>
     )
 }
