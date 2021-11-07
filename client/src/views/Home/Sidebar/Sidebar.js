@@ -1,6 +1,7 @@
 import {BsHouseFill,BsFillPersonFill,BsFillInfoCircleFill,BsBoxArrowRight} from 'react-icons/bs'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import './Sidebar.css'
-
 
 const Sidebar = (props) => 
 {
@@ -23,30 +24,29 @@ const Sidebar = (props) =>
                     <p class='logo'>MESS</p>
                 </li>
 
-                <li class={`nav-item ${props.view==='dashboard'?'selected':''}`}>
+                <li className={`nav-item ${props.view==='dashboard'?'selected':''}`}>
                     <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('dashboard')} >
-                            <BsHouseFill className='icon'/>
-                            <span class="link-text">Home</span>
+                        <i class="bi bi-house-fill"></i>
+                        <span class="link-text">Home</span>
                     </a>
                     
                 </li>
 
-                <li class={`nav-item ${props.view==='details'?'selected':''}`}>
+                <li className={`nav-item ${props.view==='details'?'selected':''}`}>
                     <a class="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('details')}>
-                        <BsFillPersonFill className='icon'/>
+                        <i class="bi bi-person-fill"></i>
                         <span class="link-text">Details</span>
                     </a>
                 </li>
 
-                <li class={`nav-item ${props.view==='info'?'selected':''}`}>
+                <li className={`nav-item ${props.view==='info'?'selected':''}`}>
                     <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
-
-                        <BsFillInfoCircleFill className='icon' />
+                        <i class="bi bi-info-circle"></i>
                         <span class="link-text">Info</span>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li className="nav-item">
                     <a href="#" class="nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('logout')}>
                         <BsBoxArrowRight className='icon' />
                         <span class="link-text logout">Logout</span>

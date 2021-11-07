@@ -28,9 +28,10 @@
 
 .nav-item{
     width: 100%;
+    cursor: pointer;
 }
 
-.nav-item .icon{
+.nav-item .bi{
     margin: 0 1.5rem;
     font-size: 2.75rem;
 }
@@ -81,5 +82,5 @@
 
 .selected
 {
-    background: darkblue;
+    background: #002350;
 }
