@@ -8,10 +8,14 @@
     margin-top: 15px;
 } */
 
-body,html{
-    background: linear-gradient(0deg, #124b96, #414EBE);
+body{
     height: 100%;
 }
+
+.container-fluid{
+    background: linear-gradient(0deg, #124b96, #414EBE);
+}
+
 .contact-form{
     box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.233);
     background: white;

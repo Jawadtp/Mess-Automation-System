@@ -29,7 +29,7 @@ const App = () => {
     }
 
     const response = await fetch('http://localhost:5000/validate', opts)
-    if(response['status']!=200) return //Token aint valid
+    if(response['status']!==200) return //Token aint valid
     let data = await response.json()
 
     data['token']=token

@@ -59,9 +59,9 @@ const Login = (props) => {
         //     </Form>
         // </div>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center d-flex flex-column min-vh-100 align-items-center">
-                <div class="col-9 col-sm-8 col-lg-6 contact-form justify-content-center">
+                <div class="col-9 col-sm-8 col-lg-5 col-xl-4 contact-form justify-content-center">
                     <h2 id='heading'>Login</h2>
                     <div class="row justify-content-center text-center">
                         <form onSubmit={onFormSubmit}>
