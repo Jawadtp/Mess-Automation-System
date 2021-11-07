@@ -32,6 +32,9 @@ const Dashboard = () =>
             <div className="annRole">
                 {announcement[1]}
             </div>
+            <div className="annTime">
+                {announcement[3]}
+            </div>
             <div className="annContent">
                 {announcement[2]}
             </div>

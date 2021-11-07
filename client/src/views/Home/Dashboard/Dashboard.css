@@ -53,3 +53,9 @@
     font-size: large;
     font-weight: 500;
 }
+
+.annTime
+{
+    font-size: 14px;
+    float: right;
+}
