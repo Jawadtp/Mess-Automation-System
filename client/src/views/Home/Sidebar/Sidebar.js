@@ -24,25 +24,26 @@ const Sidebar = (props) =>
                 </li>
 
                 <li class="nav-item">
-                    <button className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('dashboard')} >
+                    <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('dashboard')} >
                             <BsHouseFill className='icon'/>
                             <span class="link-text">Home</span>
-                    </button>
+                    </a>
+                    
                 </li>
 
                 <li class="nav-item">
-                    <button class="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('account')}>
+                    <a class="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('details')}>
                         <BsFillPersonFill className='icon'/>
-                        <span class="link-text">Account</span>
-                    </button>
+                        <span class="link-text">Details</span>
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <button className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
+                    <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
 
                         <BsFillInfoCircleFill className='icon' />
                         <span class="link-text">Info</span>
-                    </button>
+                    </a>
                 </li>
 
                 <li class="nav-item">

@@ -27,6 +27,7 @@ const Login = (props) => {
 
         const response = await fetch('http://localhost:5000/login', requestOptions)
         const data = await response.json()
+        console.log('Login in data: ')
         console.log(data)
 
         if (!('error' in data)) //User entered valid credentials.

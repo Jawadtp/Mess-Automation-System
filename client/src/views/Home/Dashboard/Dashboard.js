@@ -18,6 +18,10 @@ const Dashboard = () =>
                 <div className="rollno">
                     {user['email']}
                 </div>
+                <div className="rollno">
+                    {user['messname']===''?'Not registered to any mess':'Registered mess: ' + user['messname']}
+
+                </div>
             </div>
         </div>
     )

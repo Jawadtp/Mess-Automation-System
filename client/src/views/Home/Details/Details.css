@@ -1,0 +1,25 @@
+.mealDetails
+{
+    display: inline-block;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.mealTime
+{
+    margin-left: 10px;
+}
+
+.mealsWrapper
+{
+    display: inline;
+    margin-left: 10px;
+}
+
+.dayWrapper
+{
+    padding-top: 10px;
+    margin-left: 10px;    
+}

@@ -78,17 +78,4 @@
     transition-delay: 50ms;
 }
 
-.navBtn
-{
-    color: transparent;
-    background: transparent;
-    border: none;
-    width: 100%;
-    padding: 10px 0;
-}
-
-.navBtn:hover
-{
-    background: #002350;
-}
 
