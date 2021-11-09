@@ -86,3 +86,11 @@
     font-size: 14px;
     float: right;
 }
+
+@media (max-width:600px)
+{
+    .info{
+        margin-left: 0;
+        font-size: .85rem;
+    }
+}

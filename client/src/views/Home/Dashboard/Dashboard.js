@@ -71,8 +71,8 @@ const Dashboard = () =>
                 </div>
             </div>
 
-            <div className='row info'>
-                <div className="col-3 userInfo text-center">
+            <div className='row info justify-content-center'>
+                <div className="col-10 col-md-6 col-xl-3 userInfo text-center">
                     <div className="name">
                         {user['name']}
                     </div>
@@ -87,11 +87,11 @@ const Dashboard = () =>
                     </div>
                 </div>
 
-                <div className='col-3 dummyInfo'>
+                <div className='col-10 col-md-6 col-xl-3 dummyInfo'>
                     DUMMY
                 </div>
 
-                <div className='col-3 text-center justify-content-center secondDummyInfo d-flex flex-column'>
+                <div className='col-10 col-md-3 text-center justify-content-center secondDummyInfo d-flex flex-column'>
                     <div className='test'>
                         TEST
                     </div>
@@ -102,8 +102,8 @@ const Dashboard = () =>
 
             </div>
             
-            <div className="row announcement">
-                <div className='col-6 annWrapper'>
+            <div className="row announcement justify-content-center">
+                <div className='col-10 col-md-6 annWrapper'>
                     <div className="annTitle">
                         Announcements
                     </div>
