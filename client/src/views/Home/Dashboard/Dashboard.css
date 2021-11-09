@@ -98,4 +98,8 @@
     .footer{
         margin-top: 5rem;
     }
+
+    .dashboardWrapper{
+        padding-left: 0;
+    }
 }

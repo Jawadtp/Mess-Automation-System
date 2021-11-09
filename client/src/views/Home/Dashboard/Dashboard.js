@@ -50,24 +50,7 @@ const Dashboard = () =>
 
     return (
         <div className="dashboardWrapper">
-            <div className='header row justify-content-around text-center'>
-                <div className='col-2'>
-                    TEST
-                </div>
-
-                <div className='col-2'>
-                    <i className='bi bi-calendar-month'></i>
-                </div>
-
-                <div className='col-2'>
-                    <div className='row justify-content-end'>
-                        <div className='px-1 col-auto'>
-                            <i className='bi bi-list'></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            
             <div className='row info justify-content-center'>
                 <div className="col-10 col-md-6 col-xl-3 userInfo text-center">
                     <div className="name">

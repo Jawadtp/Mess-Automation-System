@@ -1,0 +1,12 @@
+
+.header{
+    padding: 1.25rem;
+    margin: 0 !important;
+    width: 100%;
+}
+
+@media (min-width: 600px){
+    .headerIcon{
+        margin-right: 4rem;
+    }
+}

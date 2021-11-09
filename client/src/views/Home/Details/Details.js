@@ -96,28 +96,30 @@ const Details = () =>
     return (
         <div className="detailsWrapper">
             {user['messname']===''?'You are not registered to any mess currently.':
-            <div className="messName">
-                <p>Mess {user['messname']}</p> 
-            </div>}
-            {/* {details.length==0?'':
-             details.map((day)=> dayMeals(day))
-            } */}
-
-            <div class="menuInfo">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Day</th>
-                            <th scope="col">Breakfast</th>
-                            <th scope="col">Lunch</th>
-                            <th scope="col">Dinner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {mealsTable(details)}
-                    </tbody>
-                </table>
+            <div class="menuInfo d-flex flex-column">
+                <div className="details-header">
+                    <div class="col-auto">
+                        <p>Mess {user['messname']}</p>
+                    </div> 
+                </div>
+                <div class="table-wrapper">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Day</th>
+                                <th scope="col">Breakfast</th>
+                                <th scope="col">Lunch</th>
+                                <th scope="col">Dinner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mealsTable(details)}
+                        </tbody>
+                    </table>
+                </div>
                 
+            </div>}
+            <div className='button-row row justify-content-end'>
                 <Button className="editMenuButton p-3">
                     <i className='bi bi-pen'></i>
                 </Button>

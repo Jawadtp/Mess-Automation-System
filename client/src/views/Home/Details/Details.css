@@ -2,8 +2,8 @@
     padding: 1.5rem;
 }
 
-.messName{
-    margin: 10rem 0 0 0;
+.details-header{
+    margin: 4rem 0 0 0;
     text-align: start;
     font-size: 2.5rem;
     font-weight: bolder;
@@ -24,7 +24,7 @@ thead{
 }
 
 
-th,td{
+th{
     padding: 1rem 1.25rem !important;
 }
 
@@ -33,26 +33,43 @@ tr:hover{
 }
 
 .editMenuButton{
-    position: absolute;
-    bottom: -6rem;
-    right: 10rem;
+    position: relative;
+    right: 20px;
+    height: 4rem;
+    width: 4rem;
     background-color: #00306f;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
     border: none;
     border-radius: 50%;
-    height: 4rem;
-    width: 4rem;
 }
 
 .editMenuButton:hover{
     transform: scale(1.09);
 }
 
+.button-row{
+    width:85%;
+    margin-bottom: 5rem;
+}
+
+@media (max-width: 740px){
+    .table-wrapper{
+        overflow-x: scroll;
+    }
+}
+
+
 @media (max-width: 600px){
     .table{
         margin:auto
     }
-    .messName{
+    .details-header{
         margin-left: 2.5rem;
+        margin-top: .5rem;
     }
+    .button-row{
+        margin-top:1.75rem;
+        width:100%;
+    }
+    
 }
