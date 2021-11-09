@@ -61,11 +61,8 @@ const Dashboard = () =>
 
                 <div className='col-2'>
                     <div className='row justify-content-end'>
-                        <div className='px-1 col-1'>
-                            <i className='bi bi-bell'></i>
-                        </div>
-                        <div className='col-1'>
-                            <i className='bi bi-person'></i>
+                        <div className='px-1 col-auto'>
+                            <i className='bi bi-list'></i>
                         </div>
                     </div>
                 </div>
@@ -91,7 +88,7 @@ const Dashboard = () =>
                     DUMMY
                 </div>
 
-                <div className='col-10 col-md-3 text-center justify-content-center secondDummyInfo d-flex flex-column'>
+                <div className='col-10 col-md-4 text-center justify-content-center secondDummyInfo d-flex flex-column'>
                     <div className='test'>
                         TEST
                     </div>
@@ -110,7 +107,9 @@ const Dashboard = () =>
                     {announcements.map((announcement) => displayAnnouncement(announcement))}
 
                 </div>
-            </div> 
+            </div>
+
+            <div className='footer'></div>
         </div>
     )
 }
