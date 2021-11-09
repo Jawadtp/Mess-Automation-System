@@ -9,13 +9,43 @@
     font-weight: bolder;
 }
 
+.menuInfo{
+    position: relative;
+}
+
 .table{
     width: 85%;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
 }
 
+thead{
+    background-color: #00306f;
+    color: white;
+}
+
+
+th,td{
+    padding: 1rem 1.25rem !important;
+}
+
 tr:hover{
     background-color:#00306f41;
+}
+
+.editMenuButton{
+    position: absolute;
+    bottom: -6rem;
+    right: 10rem;
+    background-color: #00306f;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+    border: none;
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+}
+
+.editMenuButton:hover{
+    transform: scale(1.09);
 }
 
 @media (max-width: 600px){

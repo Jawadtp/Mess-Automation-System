@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import './Details.css'
 
@@ -102,19 +103,26 @@ const Details = () =>
              details.map((day)=> dayMeals(day))
             } */}
 
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Day</th>
-                        <th scope="col">Breakfast</th>
-                        <th scope="col">Lunch</th>
-                        <th scope="col">Dinner</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {mealsTable(details)}
-                </tbody>
-            </table>
+            <div class="menuInfo">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Day</th>
+                            <th scope="col">Breakfast</th>
+                            <th scope="col">Lunch</th>
+                            <th scope="col">Dinner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {mealsTable(details)}
+                    </tbody>
+                </table>
+                
+                <Button className="editMenuButton p-3">
+                    <i className='bi bi-pen'></i>
+                </Button>
+            </div>
+
         </div>
     )
 }
