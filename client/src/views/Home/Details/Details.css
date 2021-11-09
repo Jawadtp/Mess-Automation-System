@@ -1,30 +1,28 @@
-.mealDetails
-{
-    display: inline-block;
-    border: 1px solid black;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 10px;
+.detailsWrapper{
+    padding: 1.5rem;
 }
 
-.mealTime
-{
-    margin-left: 10px;
+.messName{
+    margin: 10rem 0 0 0;
+    text-align: start;
+    font-size: 2.5rem;
+    font-weight: bolder;
 }
 
-.mealsWrapper
-{
-    display: inline;
-    margin-left: 10px;
+.table{
+    width: 85%;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
 }
 
-.dayWrapper
-{
-    padding-top: 10px;
-    margin-left: 10px;    
+tr:hover{
+    background-color:#00306f41;
 }
 
-.messName
-{
-    padding: 10px;
+@media (max-width: 600px){
+    .table{
+        margin:auto
+    }
+    .messName{
+        margin-left: 2.5rem;
+    }
 }
