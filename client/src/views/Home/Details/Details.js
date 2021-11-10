@@ -19,7 +19,7 @@ const Details = () =>
 
     function mealsTable(details) {
         return(details.map( (meal,i) => {
-            console.log(meal)
+            // console.log(meal)
             if (meal.length)
                 return(
                 <tr>
@@ -31,6 +31,18 @@ const Details = () =>
         }))
     }
 
+    function isAdmin(){
+        if(user['role'] === 'manager'){
+            return (<Button className="editMenuButton p-3">
+                        <i className='bi bi-pen'></i>
+                    </Button>)
+        }else
+            return (<div hidden></div>)
+    }
+
+    function onEditButtonClick(){
+        
+    }
     // function displayMeal(meal)
     // {
     //     if(meal.length)
@@ -83,8 +95,8 @@ const Details = () =>
 
         setDetails(detailsOrganised)
 
-        console.log('Organised data: ')
-        console.log(detailsOrganised)
+        // console.log('Organised data: ')
+        // console.log(detailsOrganised)
     }
 
     useEffect(() => 
@@ -120,9 +132,7 @@ const Details = () =>
                 
             </div>}
             <div className='button-row row justify-content-end'>
-                <Button className="editMenuButton p-3">
-                    <i className='bi bi-pen'></i>
-                </Button>
+                {isAdmin()}
             </div>
 
         </div>
