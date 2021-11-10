@@ -25,8 +25,8 @@ const Details = () =>
                 <tr>
                     <td><strong>{dayName[meal[0][1]]}</strong></td>
                     <td>{meal[0][0]}</td>
-                    <td>{meal[2][0]}</td>
                     <td>{meal[1][0]}</td>
+                    <td>{meal[2][0]}</td>
                 </tr>)
         }))
     }
@@ -41,31 +41,59 @@ const Details = () =>
     }
 
     function onEditButtonClick(){
-        document.getElementsByTagName('tbody')[0].contentEditable = 'true';
+        let target = document.getElementsByClassName('editMenuButton')[0].children[0].classList;
+        if (target.contains('bi-pen'))
+        {
+            document.getElementsByTagName('tbody')[0].contentEditable = 'true';
+            target.remove('bi-pen');
+            target.add('bi-check-lg');
+        }else{
+            document.getElementsByTagName('tbody')[0].contentEditable = 'false';
+            target.remove('bi-check-lg');
+            target.add('bi-pen');
+            updateMeals()
+        }
     }
-    // function displayMeal(meal)
-    // {
-    //     if(meal.length)
-    //         return( 
-    //             <div className="mealDetails">
-    //                 <span className="mealName">{meal[0]}</span>
-    //                 <span className="mealTime">{meal[2]}</span>
-    //             </div>
-    //             )
-    //     return ''
-    // }
 
-    // function dayMeals(day)
-    // {
-    //     if(day.length)
-    //         return (<div className="dayWrapper">
-    //             <span className="dayName">{dayName[day[0][1]]}</span>
-    //             <div className="mealsWrapper">
-    //                 {day.map((meal)=> displayMeal(meal))}
-    //             </div>
-    //         </div>)
-    //     return ''
-    // }
+    function updateMeals(){
+        let rows = document.querySelectorAll('tbody tr'); 
+
+        let updatedMeals = [];
+        let changedMeals = [];
+        rows.forEach((row,index) => {
+            let meals = Array.from(row.children);
+            meals.forEach((meal,i) => {
+                if (i!=0)
+                    updatedMeals.push([meal.innerText,index,i]); 
+            });
+        });
+
+        details.forEach((mealsOfDay,day) => {
+            mealsOfDay.forEach((mealDetails,time) => {
+                if(updatedMeals[day*3 + time][0] != mealDetails[0])
+                    changedMeals.push([updatedMeals[day*3 + time][0],day,mealDetails[2]]);
+            })
+        })
+
+        // console.log(changedMeals);
+        postUpdatedMeals(changedMeals);
+    }
+
+    async function postUpdatedMeals(changedMeals){
+        
+        const requestOptions = 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messID: user['messid'],
+                updatedMeals: changedMeals
+            })
+        }
+
+        const response = await fetch('http://localhost:5000/update-meals', requestOptions)
+        // fetch('http://localhost:5000/update-meals', requestOptions);
+        // const data = await response.json()
+    }
 
     const user = useSelector((state)=> state.user.value)
 
@@ -87,16 +115,17 @@ const Details = () =>
         let detailsOrganised = []
         for(var i=0; i<7; i++)
             detailsOrganised.push([])
-
+        console.log(data)
         data.forEach(meal => 
         {
+            console.log(meal)
             detailsOrganised[meal[1]].push(meal)
         });
 
         setDetails(detailsOrganised)
 
-        // console.log('Organised data: ')
-        // console.log(detailsOrganised)
+        console.log('Organised data: ')
+        console.log(detailsOrganised)
     }
 
     useEffect(() => 

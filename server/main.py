@@ -107,7 +107,14 @@ def validate():
     print(userinfo)
     return jsonify(userinfo)
 
-
+@app.route('/update-meals', methods = ['POST'])
+@cross_origin()
+def update_meals():
+    mess_id = request.json['messID']
+    meals = request.json['updatedMeals']
+    for meal in meals:
+        db.updateMenu(meal,mess_id)
+    return jsonify("Successfully Updated Menu")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
