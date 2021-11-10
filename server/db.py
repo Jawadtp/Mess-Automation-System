@@ -25,7 +25,7 @@ def getMessDetails(messId):
 
 def getAnnouncements(messId):
     cur = conn.cursor() 
-    cur.execute("SELECT u.username, u.role, a.announcement FROM users u, announcements a WHERE a.rollno IN (SELECT rollno FROM user_mess WHERE messid=%s) AND a.rollno=u.rollno",(messId,))        
+    cur.execute("SELECT u.username, u.role, a.announcement, a.postedat FROM users u, announcements a WHERE a.rollno IN (SELECT rollno FROM user_mess WHERE messid=%s) AND a.rollno=u.rollno",(messId,))        
     res = cur.fetchall()
     return res
 

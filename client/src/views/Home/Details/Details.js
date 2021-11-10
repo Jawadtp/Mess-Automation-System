@@ -87,6 +87,8 @@ const Details = () =>
             {details.length==0?'':
              details.map((day)=> dayMeals(day))
             }
+
+            
         </div>
     )
 }

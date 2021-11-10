@@ -82,13 +82,13 @@ const Dashboard = () =>
                     <div className="email">
                         {user['email']}
                     </div>
-                    <div className="mess">
-                        {user['messname']===''?'Not registered to any mess':'Registered mess: ' + user['messname']}
-                    </div>
+                   
                 </div>
 
                 <div className='col-3 dummyInfo'>
-                    DUMMY
+                    <div className="mess">
+                        {user['messname']===''?'Not registered to any mess':'Registered mess: ' + user['messname']}
+                    </div>
                 </div>
 
                 <div className='col-3 text-center justify-content-center secondDummyInfo d-flex flex-column'>
