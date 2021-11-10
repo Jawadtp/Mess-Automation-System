@@ -22,8 +22,13 @@
     margin: 1rem;
     background-color: white;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
-    padding: 3rem;
+    padding: 3rem 1.5rem;
     border-radius: 3px;
+}
+
+.email{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .secondDummyInfo{
@@ -45,14 +50,10 @@
     font-weight: bold;
 }
 
-.announcement{
-    width: 100%;
-    margin: 0;
-}
-
 .annWrapper
 {
-    margin: 1rem;
+    max-height: 20rem;
+    overflow-y: scroll;
     border-radius: 3px;
     background-color: white;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
@@ -62,6 +63,7 @@
 .annAuthor
 {
     display: inline;
+    font-weight: bolder;
 }
 
 .annRole
@@ -69,7 +71,7 @@
     display: inline;
     margin-left: 10px;
     border: 1px blue solid;
-    padding: 1px;
+    padding: .19rem;
     border-radius: 5px;
     font-size: small;
     font-weight: 500;
@@ -77,9 +79,8 @@
 
 .annTitle
 {
-    margin-left: 10px;
-    font-size: large;
-    font-weight: 500;
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
 .annTime
@@ -96,7 +97,7 @@
     }
 
     .footer{
-        margin-top: 5rem;
+        padding-top: 6.5rem;
     }
 
     .dashboardWrapper{

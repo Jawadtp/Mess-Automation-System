@@ -29,7 +29,7 @@ const Dashboard = () =>
     {
         return <div className="annMessage">
             <div className="annAuthor">
-                {announcement[0]}
+                <strong>{announcement[0]}</strong>
             </div>
             <div className="annRole">
                 {announcement[1]}
@@ -52,14 +52,14 @@ const Dashboard = () =>
         <div className="dashboardWrapper">
             
             <div className='row info justify-content-center'>
-                <div className="col-10 col-md-6 col-xl-3 userInfo text-center">
+                <div className="col-10 col-md-5 col-xl-3 userInfo text-start">
                     <div className="name">
                         {user['name']}
                     </div>
                     <div className="rollno">
                         {user['rollno']}
                     </div>
-                    <div className="email">
+                    <div className="email" title={`${user['email']}`}>
                         {user['email']}
                     </div>
                     <div className="mess">
@@ -67,7 +67,7 @@ const Dashboard = () =>
                     </div>
                 </div>
 
-                <div className='col-10 col-md-6 col-xl-3 dummyInfo'>
+                <div className='col-10 col-md-5 col-xl-3 dummyInfo'>
                     DUMMY
                 </div>
 
@@ -80,10 +80,7 @@ const Dashboard = () =>
                     </div>
                 </div>
 
-            </div>
-            
-            <div className="row announcement justify-content-center">
-                <div className='col-10 col-md-6 annWrapper'>
+                <div className='col-10 col-md-8 annWrapper'>
                     <div className="annTitle">
                         Announcements
                     </div>
@@ -91,6 +88,7 @@ const Dashboard = () =>
 
                 </div>
             </div>
+            
 
             <div className='footer'></div>
         </div>

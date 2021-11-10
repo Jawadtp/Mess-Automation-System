@@ -23,7 +23,7 @@ const Details = () =>
             if (meal.length)
                 return(
                 <tr>
-                    <td>{dayName[meal[0][1]]}</td>
+                    <td><strong>{dayName[meal[0][1]]}</strong></td>
                     <td>{meal[0][0]}</td>
                     <td>{meal[2][0]}</td>
                     <td>{meal[1][0]}</td>
@@ -33,7 +33,7 @@ const Details = () =>
 
     function isAdmin(){
         if(user['role'] === 'manager'){
-            return (<Button className="editMenuButton p-3">
+            return (<Button onClick={onEditButtonClick} className="editMenuButton p-3">
                         <i className='bi bi-pen'></i>
                     </Button>)
         }else
@@ -41,7 +41,7 @@ const Details = () =>
     }
 
     function onEditButtonClick(){
-        
+        document.getElementsByTagName('tbody')[0].contentEditable = 'true';
     }
     // function displayMeal(meal)
     // {
