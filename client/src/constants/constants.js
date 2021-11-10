@@ -5,7 +5,7 @@ const initialStateValue =
         name: '',
         email: '',
         role: 'student',
-        mess: '',
+        messname: '',
         messid: 99999
     }
 
