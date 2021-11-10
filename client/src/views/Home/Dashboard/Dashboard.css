@@ -27,7 +27,7 @@
 }
 
 .secondDummyInfo{
-    margin: 1rem;
+    margin: 1rem 0;
 }
 
 .test{
@@ -47,6 +47,7 @@
 
 .announcement{
     width: 100%;
+    margin: 0;
 }
 
 .annWrapper
@@ -85,4 +86,20 @@
 {
     font-size: 14px;
     float: right;
+}
+
+@media (max-width:600px)
+{
+    .info{
+        margin-left: 0;
+        font-size: .85rem;
+    }
+
+    .footer{
+        margin-top: 5rem;
+    }
+
+    .dashboardWrapper{
+        padding-left: 0;
+    }
 }

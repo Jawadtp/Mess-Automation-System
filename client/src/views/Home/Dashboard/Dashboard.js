@@ -50,29 +50,9 @@ const Dashboard = () =>
 
     return (
         <div className="dashboardWrapper">
-            <div className='header row justify-content-around text-center'>
-                <div className='col-2'>
-                    TEST
-                </div>
-
-                <div className='col-2'>
-                    <i className='bi bi-calendar-month'></i>
-                </div>
-
-                <div className='col-2'>
-                    <div className='row justify-content-end'>
-                        <div className='px-1 col-1'>
-                            <i className='bi bi-bell'></i>
-                        </div>
-                        <div className='col-1'>
-                            <i className='bi bi-person'></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className='row info'>
-                <div className="col-3 userInfo text-center">
+            
+            <div className='row info justify-content-center'>
+                <div className="col-10 col-md-6 col-xl-3 userInfo text-center">
                     <div className="name">
                         {user['name']}
                     </div>
@@ -85,13 +65,18 @@ const Dashboard = () =>
                    
                 </div>
 
+<<<<<<< HEAD
                 <div className='col-3 dummyInfo'>
                     <div className="mess">
                         {user['messname']===''?'Not registered to any mess':'Registered mess: ' + user['messname']}
                     </div>
+=======
+                <div className='col-10 col-md-6 col-xl-3 dummyInfo'>
+                    DUMMY
+>>>>>>> 3ca21a4f193524f793ad1f39203527d35cb4365b
                 </div>
 
-                <div className='col-3 text-center justify-content-center secondDummyInfo d-flex flex-column'>
+                <div className='col-10 col-md-4 text-center justify-content-center secondDummyInfo d-flex flex-column'>
                     <div className='test'>
                         TEST
                     </div>
@@ -102,15 +87,17 @@ const Dashboard = () =>
 
             </div>
             
-            <div className="row announcement">
-                <div className='col-6 annWrapper'>
+            <div className="row announcement justify-content-center">
+                <div className='col-10 col-md-6 annWrapper'>
                     <div className="annTitle">
                         Announcements
                     </div>
                     {announcements.map((announcement) => displayAnnouncement(announcement))}
 
                 </div>
-            </div> 
+            </div>
+
+            <div className='footer'></div>
         </div>
     )
 }

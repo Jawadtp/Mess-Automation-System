@@ -1,9 +1,15 @@
 .homeWrapper{
     background-color: #f7f8fa;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .homeContent
 {
     margin-left: 15rem;
+}
+
+@media (max-width:600px){
+    .homeContent{
+        margin-left: 0;
+    }
 }

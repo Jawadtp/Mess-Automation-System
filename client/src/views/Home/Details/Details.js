@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import './Details.css'
 
@@ -16,29 +17,55 @@ const Details = () =>
         6: 'Sunday'
     }
 
-    function displayMeal(meal)
-    {
-        if(meal.length)
-            return( 
-                <div className="mealDetails">
-                    <span className="mealName">{meal[0]}</span>
-                    <span className="mealTime">{meal[2]}</span>
-                </div>
-                )
-        return ''
+    function mealsTable(details) {
+        return(details.map( (meal,i) => {
+            // console.log(meal)
+            if (meal.length)
+                return(
+                <tr>
+                    <td>{dayName[meal[0][1]]}</td>
+                    <td>{meal[0][0]}</td>
+                    <td>{meal[2][0]}</td>
+                    <td>{meal[1][0]}</td>
+                </tr>)
+        }))
     }
 
-    function dayMeals(day)
-    {
-        if(day.length)
-        return <div className="dayWrapper">
-            <span className="dayName">{dayName[day[0][1]]}</span>
-            <div className="mealsWrapper">
-                {day.map((meal)=> displayMeal(meal))}
-            </div>
-        </div>
-        return ''
+    function isAdmin(){
+        if(user['role'] === 'manager'){
+            return (<Button className="editMenuButton p-3">
+                        <i className='bi bi-pen'></i>
+                    </Button>)
+        }else
+            return (<div hidden></div>)
     }
+
+    function onEditButtonClick(){
+        
+    }
+    // function displayMeal(meal)
+    // {
+    //     if(meal.length)
+    //         return( 
+    //             <div className="mealDetails">
+    //                 <span className="mealName">{meal[0]}</span>
+    //                 <span className="mealTime">{meal[2]}</span>
+    //             </div>
+    //             )
+    //     return ''
+    // }
+
+    // function dayMeals(day)
+    // {
+    //     if(day.length)
+    //         return (<div className="dayWrapper">
+    //             <span className="dayName">{dayName[day[0][1]]}</span>
+    //             <div className="mealsWrapper">
+    //                 {day.map((meal)=> displayMeal(meal))}
+    //             </div>
+    //         </div>)
+    //     return ''
+    // }
 
     const user = useSelector((state)=> state.user.value)
 
@@ -68,8 +95,8 @@ const Details = () =>
 
         setDetails(detailsOrganised)
 
-        console.log('Organised data: ')
-        console.log(detailsOrganised)
+        // console.log('Organised data: ')
+        // console.log(detailsOrganised)
     }
 
     useEffect(() => 
@@ -81,14 +108,41 @@ const Details = () =>
     return (
         <div className="detailsWrapper">
             {user['messname']===''?'You are not registered to any mess currently.':
-            <div className="messName">
-                You are registered to mess {user['messname']} 
+            <div class="menuInfo d-flex flex-column">
+                <div className="details-header">
+                    <div class="col-auto">
+                        <p>Mess {user['messname']}</p>
+                    </div> 
+                </div>
+                <div class="table-wrapper">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Day</th>
+                                <th scope="col">Breakfast</th>
+                                <th scope="col">Lunch</th>
+                                <th scope="col">Dinner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mealsTable(details)}
+                        </tbody>
+                    </table>
+                </div>
+                
             </div>}
+<<<<<<< HEAD
             {details.length==0?'':
              details.map((day)=> dayMeals(day))
             }
 
             
+=======
+            <div className='button-row row justify-content-end'>
+                {isAdmin()}
+            </div>
+
+>>>>>>> 3ca21a4f193524f793ad1f39203527d35cb4365b
         </div>
     )
 }
