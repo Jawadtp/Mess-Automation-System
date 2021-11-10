@@ -131,18 +131,11 @@ const Details = () =>
                 </div>
                 
             </div>}
-<<<<<<< HEAD
-            {details.length==0?'':
-             details.map((day)=> dayMeals(day))
-            }
-
             
-=======
             <div className='button-row row justify-content-end'>
                 {isAdmin()}
             </div>
 
->>>>>>> 3ca21a4f193524f793ad1f39203527d35cb4365b
         </div>
     )
 }
