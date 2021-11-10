@@ -62,9 +62,7 @@ const Dashboard = () =>
                     <div className="email" title={`${user['email']}`}>
                         {user['email']}
                     </div>
-                    <div className="mess">
-                        {user['messname']===''?'Not registered to any mess':'Registered mess: ' + user['messname']}
-                    </div>
+                   
                 </div>
 
                 <div className='col-10 col-md-5 col-xl-3 dummyInfo'>
