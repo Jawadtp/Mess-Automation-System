@@ -3,7 +3,7 @@ import './header.css'
 function Header(props){
     return(
         <div className='header row text-center'>
-            <div className='col-auto text-muted'>
+            <div className='col-auto text-muted' style={{padding: '0'}}>
                 Mess Automation System
             </div>
 

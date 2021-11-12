@@ -90,7 +90,7 @@
     }
   
     .nav-item{
-        width: 25vw;
+        min-width: 20vw;
     }
 
     .nav-item .bi{

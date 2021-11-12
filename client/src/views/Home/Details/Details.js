@@ -115,17 +115,17 @@ const Details = () =>
         let detailsOrganised = []
         for(var i=0; i<7; i++)
             detailsOrganised.push([])
-        console.log(data)
+        // console.log(data)
         data.forEach(meal => 
         {
-            console.log(meal)
+            // console.log(meal)
             detailsOrganised[meal[1]].push(meal)
         });
 
         setDetails(detailsOrganised)
 
-        console.log('Organised data: ')
-        console.log(detailsOrganised)
+        // console.log('Organised data: ')
+        // console.log(detailsOrganised)
     }
 
     useEffect(() => 

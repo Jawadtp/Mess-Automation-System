@@ -1,11 +1,11 @@
-import {BsHouseFill,BsFillPersonFill,BsFillInfoCircleFill,BsBoxArrowRight} from 'react-icons/bs'
+import { useSelector } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './Sidebar.css'
 
 const Sidebar = (props) => 
 {
-
+    const user = useSelector((state)=> state.user.value)
     function onNavLinkClick(linkName)
     {
         if(linkName==='logout')
@@ -41,10 +41,20 @@ const Sidebar = (props) =>
 
                 <li className={`nav-item ${props.view==='info'?'selected':''}`}>
                     <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
-                        <i class="bi bi-info-circle"></i>
+                        <i class="bi bi-info-circle-fill"></i>
                         <span class="link-text">Info</span>
                     </a>
                 </li>
+
+                {user['role']==='manager'?                    
+                    <li className={`nav-item ${props.view==='manage'?'selected':''}`}>
+                        <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('manage')}>
+                            <i class="bi bi-gear-fill"></i>
+                            <span class="link-text">Manage</span>
+                        </a>
+                    </li>
+                :''}
+                
 
                 <li className="nav-item">
                     <a href="#" class="nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('logout')}>

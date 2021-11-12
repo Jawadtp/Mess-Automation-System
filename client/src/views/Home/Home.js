@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux'
 import Dashboard from './Dashboard/Dashboard'
 import Details from './Details/Details'
 import Header from './header/header'
-import './Home.css'
 import Sidebar from './Sidebar/Sidebar'
+import Manage from './Manage/manage'
+import './Home.css'
 
 const Home = () => 
 {
@@ -18,6 +19,8 @@ const Home = () =>
                 return <Dashboard/>
             case 'details':
                 return <Details/>
+            case 'manage':
+                return <Manage/>
             default: 
                 return view + ' to be implemented'
         }

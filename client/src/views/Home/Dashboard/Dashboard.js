@@ -7,7 +7,6 @@ import './Dashboard.css'
 const Dashboard = () => 
 {
     const user = useSelector((state)=> state.user.value)
-
     const [announcements, setAnnouncements] = useState([])
 
     async function fetchAnnouncements()
@@ -22,7 +21,7 @@ const Dashboard = () =>
         const response = await fetch('http://localhost:5000/announcements', requestOptions)
         const data = await response.json()
         setAnnouncements(data)
-        console.log(data)
+        // console.log(data)
     }
 
     function displayAnnouncement(announcement)
