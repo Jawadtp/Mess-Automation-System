@@ -17,13 +17,27 @@
     width: 100%;
 }
 
-.userInfo,.dummyInfo
+.info > *{
+    padding: 1rem 1rem 0;
+}
+
+.user-info,.current-fees
 {
-    margin: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: white;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
-    padding: 3rem 1.5rem;
+    padding: 1rem;
     border-radius: 3px;
+}
+
+.current-fees{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .email{
@@ -31,12 +45,10 @@
     text-overflow: ellipsis;
 }
 
-.secondDummyInfo{
-    margin: 1rem 0;
-}
 
-.test{
-    height: 50%;
+#pending-fee,
+#next-meal{
+    /* height: 50%; */
     background-color: white;
     margin:.25rem;
     padding: 1rem;
@@ -50,14 +62,34 @@
     font-weight: bold;
 }
 
+.fees-status{
+    background-color: var(--accent-blue);
+    color: white;
+    margin:.25rem;
+    padding: .25rem 0;
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+
 .annWrapper
 {
-    max-height: 20rem;
-    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
     border-radius: 3px;
     background-color: white;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
     padding:3rem;
+}
+
+/* .announcement-table{
+    max-height: 20rem;
+    overflow: scroll;
+} */
+
+.announcement-table .table{
+    border: 0.15rem solid var(--accent-blue);
+    margin: auto;
 }
 
 .annAuthor
@@ -89,15 +121,15 @@
     float: right;
 }
 
+.footer{
+    padding-top: 6.5rem;
+}
+
 @media (max-width:600px)
 {
     .info{
         margin-left: 0;
         font-size: .85rem;
-    }
-
-    .footer{
-        padding-top: 6.5rem;
     }
 
     .dashboardWrapper{

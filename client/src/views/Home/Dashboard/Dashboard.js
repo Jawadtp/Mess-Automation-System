@@ -24,22 +24,30 @@ const Dashboard = () =>
         // console.log(data)
     }
 
-    function displayAnnouncement(announcement)
+    function displayAnnouncement(announcements)
     {
-        return <div className="annMessage">
-            <div className="annAuthor">
-                <strong>{announcement[0]}</strong>
-            </div>
-            <div className="annRole">
-                {announcement[1]}
-            </div>
-            <div className="annTime">
-                {announcement[3]}
-            </div>
-            <div className="annContent">
-                {announcement[2]}
-            </div>
-        </div>
+        return(
+            announcements.map((announcement) => {
+                return <tr>
+                    <td>
+                        <div className="annMessage">
+                            <div className="annAuthor">
+                                <strong>{announcement[0]}</strong>
+                            </div>
+                            {/* <div className="annRole">
+                                {announcement[1]}
+                            </div> */}
+                            <div className="annTime text-muted">
+                                {announcement[3]}
+                            </div>
+                            <div className="annContent">
+                                {announcement[2]}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            })
+        ) 
     }
 
     useEffect(() => 
@@ -51,39 +59,65 @@ const Dashboard = () =>
         <div className="dashboardWrapper">
             
             <div className='row info justify-content-center'>
-                <div className="col-10 col-md-5 col-xl-3 userInfo text-start">
-                    <div className="name">
-                        {user['name']}
+                <div className="col-10 col-md-4 col-xl-3 text-start">
+                    <div className='user-info'>
+                        <div className="name">
+                            {user['name']}
+                        </div>
+                        <div className="rollno">
+                            {user['rollno']}
+                        </div>
+                        <div className="email" title={`${user['email']}`}>
+                            {user['email']}
+                        </div>
                     </div>
-                    <div className="rollno">
-                        {user['rollno']}
-                    </div>
-                    <div className="email" title={`${user['email']}`}>
-                        {user['email']}
-                    </div>
-                   
                 </div>
 
-                <div className='col-10 col-md-5 col-xl-3 dummyInfo'>
-                    DUMMY
+                <div className='col-10 col-md-4 col-xl-3'>
+                    <div className='current-fees'>
+                        <div>Current Fees</div>
+                        <h2><strong>Rs. 3,266</strong></h2>
+                        <h6 className='text-muted'>Extras: {}</h6>
+                    </div>
                 </div>
 
-                <div className='col-10 col-md-4 text-center justify-content-center secondDummyInfo d-flex flex-column'>
+                <div className='col-10 col-md-8 col-xl-3 text-center justify-content-center secondary-info d-flex flex-column'>
                     <div className='test'>
-                        TEST
+                        <div id='pending-fee'>
+                            <div>Pending Fees</div>
+                            <h3><strong>Rs. 4,523</strong></h3>
+                        </div>
+                        <div className='fees-status'>
+                            <div>Status:</div>
+                            <div> Cleared</div>
+                        </div>
                     </div>
+
                     <div className='test'>
-                        TEST
+                        <div id='next-meal'>
+                            <div>Next Meal</div>
+                            <h3><strong>Sample Meal Here</strong></h3>
+                        </div>
                     </div>
                 </div>
 
-                <div className='col-10 col-md-8 annWrapper'>
-                    <div className="annTitle">
-                        Announcements
+                <div className='col-10 col-md-8'>
+                    <div class="annWrapper">
+                        <div className='announcement-table'>
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><h3><strong>Announcements</strong></h3></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {displayAnnouncement(announcements)}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    {announcements.map((announcement) => displayAnnouncement(announcement))}
-
                 </div>
+
             </div>
             
 

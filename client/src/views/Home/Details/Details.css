@@ -12,10 +12,16 @@
 .menuInfo{
     position: relative;
 }
-
-.table{
+.table-wrapper{
     width: 85%;
+    margin: auto;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+    
+}
+
+.table-wrapper .table{
+    border: .15rem solid var(--accent-blue);
+    margin: 0;
 }
 
 thead{
@@ -35,6 +41,7 @@ tr:hover{
 .editMenuButton{
     position: relative;
     right: 20px;
+    top: 10px;
     height: 4rem;
     width: 4rem;
     background-color: #00306f;
@@ -65,8 +72,7 @@ tr:hover{
         margin:auto
     }
     .details-header{
-        margin-left: 2.5rem;
-        margin-top: .5rem;
+        margin: .5rem 0;
     }
     .button-row{
         margin-top:1.75rem;

@@ -139,7 +139,7 @@ const Details = () =>
             {user['messname']===''?'You are not registered to any mess currently.':
             <div class="menuInfo d-flex flex-column">
                 <div className="details-header">
-                    <div class="col-auto">
+                    <div class="col-auto text-center">
                         <p>Mess {user['messname']}</p>
                     </div> 
                 </div>
