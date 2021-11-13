@@ -1,12 +1,3 @@
-/* .loginFormWrapper
-{
-    padding: 100px;
-}
-
-#submitBtn
-{
-    margin-top: 15px;
-} */
 
 body{
     height: 100%;
@@ -66,4 +57,13 @@ p span{
 p span:hover{
     cursor: pointer;
     color: rgb(0, 0, 0);
+}
+
+@media (max-width: 600px){
+
+    #submitBtn
+    {
+        margin: .25rem 0;
+        width: 40%
+    } 
 }
