@@ -3,7 +3,7 @@
     width: 8rem;
     height: 100vh;
     position: fixed;
-    background-color: #00306f;
+    background-color: var(--accent);
     transition: width 100ms ease;
     box-shadow: 10px 0 10px rgba(42, 42, 42, 0.178);
 }
@@ -52,7 +52,7 @@
 }
 
 .nav-link:hover {
-    background: #002350;
+    background: var(--accent-dark);
     color: white;
 }
   
@@ -72,7 +72,7 @@
 
 .selected
 {
-    background: #002350;
+    background: var(--accent-dark);
 }
 
 @media only screen and (max-width: 600px) {

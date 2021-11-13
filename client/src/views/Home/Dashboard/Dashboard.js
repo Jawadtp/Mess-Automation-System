@@ -81,8 +81,8 @@ const Dashboard = () =>
                     </div>
                 </div>
 
-                <div className='col-10 col-md-8 col-xl-3 text-center justify-content-center secondary-info d-flex flex-column'>
-                    <div className='test'>
+                <div className='col-10 col-md-8 col-xl-3 text-center justify-content-center d-flex flex-column'>
+                    <div>
                         <div id='pending-fee'>
                             <div>Pending Fees</div>
                             <h3><strong>Rs. 4,523</strong></h3>

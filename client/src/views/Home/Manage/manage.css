@@ -35,7 +35,7 @@ h3{
 .icon-container{
     padding: 0.5rem;
     border-radius: 5px 0 0 5px;
-    background-color: var(--accent-blue);
+    background-color: var(--accent);
     color: white;
 }
 

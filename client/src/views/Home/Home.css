@@ -1,5 +1,7 @@
 *{
-    --accent-blue : #00306f;
+    /* --accent-blue : #00306f; */
+    --accent : #5634b4;
+    --accent-dark: #3f2094;
 }
 
 .homeWrapper{

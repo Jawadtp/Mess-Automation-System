@@ -12,20 +12,21 @@
 .menuInfo{
     position: relative;
 }
+
 .table-wrapper{
     width: 85%;
     margin: auto;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
-    
+    border: .15rem solid var(--accent);
 }
 
-.table-wrapper .table{
-    border: .15rem solid var(--accent-blue);
-    margin: 0;
+.table-wrapper .table {
+    margin:0;
 }
+
 
 thead{
-    background-color: #00306f;
+    background-color: var(--accent);
     color: white;
 }
 
@@ -44,7 +45,7 @@ tr:hover{
     top: 10px;
     height: 4rem;
     width: 4rem;
-    background-color: #00306f;
+    background-color: var(--accent);
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
     border: none;
     border-radius: 50%;

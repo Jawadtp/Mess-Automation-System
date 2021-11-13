@@ -30,7 +30,7 @@
     background-color: white;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
     padding: 1rem;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .current-fees{
@@ -52,43 +52,52 @@
     background-color: white;
     margin:.25rem;
     padding: 1rem;
-    border-radius: 3px;
-    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+    border-radius: 5px;
+    box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.123);
 }
 
 .name{
-    color: #00306f;
+    color: var(--accent-dark);
     font-size: 1.5rem;
     font-weight: bold;
 }
 
+.fee-container{
+    display: flex;
+    justify-content: center;
+}
+
 .fees-status{
-    background-color: var(--accent-blue);
+    background-color: var(--accent);
+    box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.123);
+    border-radius: 0 0 5px 5px;
     color: white;
     margin:.25rem;
     padding: .25rem 0;
     display: flex;
     justify-content: center;
     gap: .5rem;
+    position: relative;
+    top: -.5rem;
 }
 
 .annWrapper
 {
     display: flex;
     justify-content: center;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: white;
-    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+    box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.123);
     padding:3rem;
 }
 
-/* .announcement-table{
+.announcement-table{
     max-height: 20rem;
     overflow: scroll;
-} */
+    border: 0.15rem solid var(--accent);
+}
 
 .announcement-table .table{
-    border: 0.15rem solid var(--accent-blue);
     margin: auto;
 }
 
@@ -97,7 +106,6 @@
     display: inline;
     font-weight: bolder;
 }
-
 .annRole
 {
     display: inline;
