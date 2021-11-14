@@ -3,7 +3,7 @@
 }
 
 .details-header{
-    margin: 4rem 0 0 0;
+    /* margin: 4rem 0 0 0; */
     text-align: start;
     font-size: 2.5rem;
     font-weight: bolder;
@@ -40,9 +40,9 @@ tr:hover{
 }
 
 .editMenuButton{
-    position: relative;
-    right: 20px;
-    top: 10px;
+    position: absolute;
+    right: 0;
+    bottom: -5rem;
     height: 4rem;
     width: 4rem;
     background-color: var(--accent);

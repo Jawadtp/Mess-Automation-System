@@ -156,15 +156,16 @@ const Details = () =>
                         <tbody>
                             {mealsTable(details)}
                         </tbody>
+                        {isAdmin()}
                     </table>
                 </div>
                 
             </div>}
             
-            <div className='button-row row justify-content-end'>
-                {isAdmin()}
-            </div>
-
+            {/* <div className='button-row row justify-content-end'>
+                
+            </div> */}
+            <footer style={{marginTop:'10rem'}}></footer>
         </div>
     )
 }

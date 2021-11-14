@@ -1,13 +1,13 @@
+import React,{useState} from 'react'
 import './manage.css'
+import Modal from './modal'
 
 function Manage(){
 
-    function displayModal(option){
-        document.getElementById(option).style.display = 'block';
-    }
+    const [modal, setModal] = useState('none');
 
-    function cancelModal(option){
-        document.getElementById(option).style.display = 'none';
+    function changeModal(modalName){
+        setModal(modalName);
     }
 
     return(
@@ -15,7 +15,7 @@ function Manage(){
             <h3><strong>Choose Options to Manage</strong></h3>
             <div className="row options-row">
 
-                <div className="col-9 col-md-4 col-xl-3 options">
+                <div className="col-9 col-md-4 col-xl-3 options" onClick={() => setModal('leaveRequests')}>
                     <div className="options-card">
                         <div className='col-auto icon-container'>
                             <i className='bi bi-chat-fill'></i>
@@ -27,7 +27,19 @@ function Manage(){
                     </div>
                 </div>
 
-                <div className="col-9 col-md-4 col-xl-3 options">
+                <div className="col-9 col-md-4 col-xl-3 options" onClick={() => setModal('addExtras')}>
+                    <div className="options-card">
+                        <div className='col-auto icon-container'>
+                            <i className='bi bi-plus'></i>
+                        </div>
+
+                        <div className="col-6 options-text">
+                            <p>Add Extras</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-9 col-md-4 col-xl-3 options" onClick={() => setModal('studentInfo')}>
                     <div className="options-card">
                             <div className='col-auto icon-container'>
                                 <i className='bi bi-info-circle-fill'></i>
@@ -39,7 +51,7 @@ function Manage(){
                         </div>
                 </div>
 
-                <div className="col-9 col-md-4 col-xl-3 options">
+                <div className="col-9 col-md-4 col-xl-3 options" onClick={() => setModal('endFeePeriod')}>
                     <div className="options-card">
                         <div className='col-auto icon-container'>
                             <i className='bi bi-x'></i>
@@ -51,7 +63,9 @@ function Manage(){
                     </div>
                 </div>
 
-                <div className="col-9 col-md-4 col-xl-3 options" onClick={() => displayModal('announcement-modal')}>
+                <div className="col-9 col-md-4 col-xl-3 options" onClick={() => {
+                    setModal('announcement')
+                }}>
                     <div className="options-card">
                         <div className='col-auto icon-container'>
                             <i className='bi bi-megaphone-fill'></i>
@@ -63,31 +77,8 @@ function Manage(){
                     </div>
                 </div>
 
-                <div className="custom-modal" id='announcement-modal'>
-                    <div className="modal-container">
-                        <div className="modal-box">
-                            <h2><strong>Create Announcement</strong></h2>
 
-                            <form id="announcement-form">
-                                <div class="form-group p-2">
-                                    <input type="text" name="announcement" class="form-control" placeholder="Enter announcement"/>
-                                </div>
-
-                                <div class="row justify-content-center mt-1">
-                                    <div class="col-5">
-                                        <input type="button" id="cancel" class="form-control btn btn-primary" value="Cancel" onClick={() => cancelModal('announcement-modal')} />
-                                    </div>
-                                    <div class="col-5">
-                                        <input type="submit" class="form-control btn btn-primary" value="Submit"/>
-                                    </div>
-                                </div>
-                            </form>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-9 col-md-4 col-xl-3 options">
+                <div className="col-9 col-md-4 col-xl-3 options" onClick={() => setModal('complaints')}>
                     <div className="options-card">
                         <div className='col-auto icon-container'>
                             <i className='bi bi-exclamation-circle-fill'></i>
@@ -100,6 +91,7 @@ function Manage(){
                 </div>
             </div>
 
+            <Modal changeModal={changeModal} modal={modal} />
             
         </div>
     )
