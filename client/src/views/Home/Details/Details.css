@@ -41,7 +41,7 @@ tr:hover{
 
 .editMenuButton{
     position: absolute;
-    right: 0;
+    right: 5rem;
     bottom: -5rem;
     height: 4rem;
     width: 4rem;
