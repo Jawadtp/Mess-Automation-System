@@ -50,6 +50,26 @@ const Dashboard = () =>
         ) 
     }
 
+    function showModal()
+    {
+        
+    }
+
+    function displayCurrentMess()
+    {
+        if(user['messname']==='' && user['role']==='student')
+            return <div className='registerMess'>
+                <button type="button" class="btn btn-primary">Register in a mess</button>
+            </div>
+
+        else if(user['messname']==='' && user['role']==='manager')
+            return <div className='managerNotRegistered'>You are not currently managing any mess.</div>
+        
+        return <div className='currentMess'>
+            You are {user['role']==='student'?'registered to ':'managing '} mess {user['messname']}
+        </div>
+    }
+
     useEffect(() => 
     {
        fetchAnnouncements()
@@ -58,6 +78,25 @@ const Dashboard = () =>
     return (
         <div className="dashboardWrapper">
             
+            <div className="custom-modal">
+
+            <div className="modal-container">
+                <div className="modal-box">
+                    <h2><strong>Add Extras</strong></h2>
+
+                    <div id="add-extras-container">
+                        <div class="row justify-content-center mt-1">
+                            <div class="col-auto">
+                                <input type="button" class="form-control btn btn-primary" value="Done" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            </div>
+
+
             <div className='row info justify-content-center'>
                 <div className="col-10 col-md-4 col-xl-3 text-start">
                     <div className='user-info'>
@@ -70,6 +109,8 @@ const Dashboard = () =>
                         <div className="email" title={`${user['email']}`}>
                             {user['email']}
                         </div>
+                        {displayCurrentMess()}
+                        
                     </div>
                 </div>
 
@@ -112,6 +153,8 @@ const Dashboard = () =>
                                 </thead>
                                 <tbody>
                                     {displayAnnouncement(announcements)}
+                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -119,6 +162,7 @@ const Dashboard = () =>
                 </div>
 
             </div>
+    
             
 
             <div className='footer'></div>

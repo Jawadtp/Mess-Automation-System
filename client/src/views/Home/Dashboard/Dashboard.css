@@ -133,6 +133,11 @@
     padding-top: 6.5rem;
 }
 
+
+.registerMess
+{
+    margin-top: 10px;
+}
 @media (max-width:600px)
 {
     .info{
@@ -144,3 +149,4 @@
         padding-left: 0;
     }
 }
+
