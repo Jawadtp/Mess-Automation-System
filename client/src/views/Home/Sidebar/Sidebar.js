@@ -45,16 +45,13 @@ const Sidebar = (props) =>
                         <span class="link-text">Info</span>
                     </a>
                 </li>
-
-                {user['role']==='manager'?                    
-                    <li className={`nav-item ${props.view==='manage'?'selected':''}`}>
-                        <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('manage')}>
-                            <i class="bi bi-gear-fill"></i>
-                            <span class="link-text">Manage</span>
-                        </a>
-                    </li>
-                :''}
                 
+                <li className={`nav-item ${props.view==='manage'?'selected':''}`}>
+                    <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('manage')}>
+                        <i class="bi bi-gear-fill"></i>
+                        <span class="link-text">Manage</span>
+                    </a>
+                </li>
 
                 <li className="nav-item">
                     <a href="#" class="nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('logout')}>

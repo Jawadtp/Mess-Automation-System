@@ -4,13 +4,15 @@ import Dashboard from './Dashboard/Dashboard'
 import Details from './Details/Details'
 import Header from './header/header'
 import Sidebar from './Sidebar/Sidebar'
-import Manage from './Manage/manage'
+import Manage from './Manager/manage'
+import StudentManage from './Student/studentManage'
 import './Home.css'
 
 const Home = () => 
 {
     const [view, setView] = useState('dashboard')
-
+    const user = useSelector((state)=> state.user.value)
+    console.log('User: ',user)
     function renderView(view)
     {
         switch(view)
@@ -20,7 +22,10 @@ const Home = () =>
             case 'details':
                 return <Details/>
             case 'manage':
-                return <Manage/>
+                if ( user['role'] === 'manager' )                
+                    return <Manage/>
+                else
+                    return <StudentManage/>
             default: 
                 return view + ' to be implemented'
         }

@@ -1,0 +1,62 @@
+
+p{
+    margin:0
+}
+
+.manageWrapper{
+    padding: 2rem;
+}
+
+h3{
+    text-align: center;
+}
+
+.options-row{
+    justify-content:center;
+    padding-bottom: 5.5rem;
+}
+
+.options-card{
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 9px 4px 10px rgb(42 42 42 / 18%);
+}
+
+.options{
+    padding: .25rem .5rem;
+}
+
+.options:hover{
+    transform: scale(1.015);
+    cursor: pointer;
+}
+
+.icon-container{
+    padding: 0.5rem;
+    border-radius: 5px 0 0 5px;
+    background-color: var(--accent);
+    color: white;
+}
+
+.options-text{
+    display: flex;
+    align-items: center;
+    flex:1;
+    padding-left: .75rem;
+    white-space: normal;
+    overflow: hidden;
+}
+
+
+
+.btn{
+    background-color: var(--accent);
+    border: none;
+}
+/* @media (max-width: 600px){
+
+    .options-row{
+        justify-content: center;
+    }
+} */
