@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './Dashboard.css'
+import RegMenu from './MessRegistration/RegMenu'
 
 const Dashboard = () => 
 {
     const user = useSelector((state)=> state.user.value)
     const [announcements, setAnnouncements] = useState([])
+    const [isMessRegModalShown, showMessRegModal] = useState(false)
 
     async function fetchAnnouncements()
     {
@@ -50,16 +52,13 @@ const Dashboard = () =>
         ) 
     }
 
-    function showModal()
-    {
-        
-    }
+    
 
     function displayCurrentMess()
     {
         if(user['messname']==='' && user['role']==='student')
             return <div className='registerMess'>
-                <button type="button" class="btn btn-primary">Register in a mess</button>
+                <button type="button" class="btn btn-primary" onClick={()=>{showMessRegModal(true)}}>Register in a mess</button>
             </div>
 
         else if(user['messname']==='' && user['role']==='manager')
@@ -78,25 +77,7 @@ const Dashboard = () =>
     return (
         <div className="dashboardWrapper">
             
-            <div className="custom-modal">
-
-            <div className="modal-container">
-                <div className="modal-box">
-                    <h2><strong>Add Extras</strong></h2>
-
-                    <div id="add-extras-container">
-                        <div class="row justify-content-center mt-1">
-                            <div class="col-auto">
-                                <input type="button" class="form-control btn btn-primary" value="Done" />
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            </div>
-
-
+           
             <div className='row info justify-content-center'>
                 <div className="col-10 col-md-4 col-xl-3 text-start">
                     <div className='user-info'>
@@ -162,9 +143,10 @@ const Dashboard = () =>
                 </div>
 
             </div>
-    
-            
+        
 
+            {isMessRegModalShown?<RegMenu showMessRegModal={showMessRegModal}/>:''}
+            
             <div className='footer'></div>
         </div>
     )
