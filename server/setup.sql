@@ -1,8 +1,10 @@
 
-/* Create student table */
+/* Create users table */
 
 CREATE TABLE users(rollno VARCHAR(10) PRIMARY KEY, username VARCHAR(30) NOT NULL, password VARCHAR(50) NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, role VARCHAR(10));
 
+
+/* Insert users into users table */
 
 INSERT INTO users (rollno, username, password, email, role) VALUES ('B190441CS', 'Mohammed Jawad TP', 'admin', 'mohammedjawad_b190441cs@nitc.ac.in', 'student');
 
@@ -21,55 +23,87 @@ INSERT INTO users (rollno, username, password, email, role) VALUES ('W190101', '
 
 /* Create mess table */
 
-CREATE TABLE mess(messid SERIAL PRIMARY KEY, messname VARCHAR(30) NOT NULL, rate SERIAL NOT NULL, rollno VARCHAR(10) references users(rollno));
+CREATE TABLE mess(messid SERIAL PRIMARY KEY, messname VARCHAR(30) NOT NULL, rate SERIAL NOT NULL, feeslastcalculated TIMESTAMP DEFAULT NOW());
 
-INSERT INTO mess(messname, rate, rollno) VALUES ('A', 200, 'W190100');
+INSERT INTO mess(messname, rate) VALUES ('A', 200);
 
-INSERT INTO mess(messname, rate, rollno) VALUES ('B', 150, 'W190101');
+INSERT INTO mess(messname, rate) VALUES ('B', 150);
 
 
-/* Create user_mess table */
+/* Create managers table */
 
-CREATE TABLE user_mess(messid INTEGER references mess(messid), rollno VARCHAR(10) references users(rollno));
+CREATE TABLE managers(messid INTEGER references mess(messid), managerid VARCHAR(10) references users(rollno));
 
-INSERT INTO user_mess (messid, rollno) VALUES (2, 'B190441CS'); /* Jawad is registered to B mess */
+INSERT INTO managers VALUES (2, 'W190100'); /* Tom Cruise manages mess B */
 
-INSERT INTO user_mess (messid, rollno) VALUES (1, 'B190837CS'); /* Shehzad is registered to A mess */
 
-INSERT INTO user_mess (messid, rollno) VALUES (2, 'W190100'); /* Tom Cruise manages B mess */
+/* Create student_mess table */
+
+CREATE TABLE student_mess(messid INTEGER references mess(messid), rollno VARCHAR(10) references users(rollno), noOfLeaves INTEGER DEFAULT 0);
+
+INSERT INTO student_mess (messid, rollno) VALUES (2, 'B190441CS'); /* Jawad is registered to B mess */
+
+INSERT INTO student_mess (messid, rollno) VALUES (1, 'B190837CS'); /* Shehzad is registered to A mess */
+
+
+/* Create announcements table */
+
+CREATE TABLE announcements(id SERIAL PRIMARY KEY, rollno VARCHAR(10) references users(rollno), announcement VARCHAR(100), postedat TIMESTAMP DEFAULT NOW());
+
+INSERT INTO announcements(rollno, announcement) VALUES('W190100', 'Hey there! It is your manager here. I hope you are all having a good day :)');
+
+INSERT INTO announcements(rollno, announcement) VALUES('W190100', 'Hola folks. Lunch is going to be delayed by an hour tomorrow. My apologies');
+
+
+/* Create meals table */
+
+CREATE TABLE meals(id SERIAL PRIMARY KEY, mealname VARCHAR(30) NOT NULL, "type" INTEGER NOT NULL); /* Type: 0 -> veg, 1 -> non-veg */
+
+/* Adding meals to meals table */
+
+INSERT INTO meals(mealname, type) VALUES('Appam', 0);
+INSERT INTO meals(mealname, type) VALUES('Ghee rice', 0);
+INSERT INTO meals(mealname, type) VALUES('Kerala rice', 0);
+INSERT INTO meals(mealname, type) VALUES('Puttu', 0);
+INSERT INTO meals(mealname, type) VALUES('Chapathi', 0);
+INSERT INTO meals(mealname, type) VALUES('Porotta', 0);
+INSERT INTO meals(mealname, type) VALUES('Noolputtu', 0);
+INSERT INTO meals(mealname, type) VALUES('Fried rice', 1);
+INSERT INTO meals(mealname, type) VALUES('Masala Dosa', 0);
+INSERT INTO meals(mealname, type) VALUES('Uppuma', 0);
+INSERT INTO meals(mealname, type) VALUES('Noodles', 0);
+INSERT INTO meals(mealname, type) VALUES('Pizza', 1);
+INSERT INTO meals(mealname, type) VALUES('Dosa', 0);
+INSERT INTO meals(mealname, type) VALUES('Chapathi', 0);
+INSERT INTO meals(mealname, type) VALUES('Pasta', 0);
+INSERT INTO meals(mealname, type) VALUES('Chicken Biriyani', 1);
+INSERT INTO meals(mealname, type) VALUES('Mandi', 1);
+
 
 
 /* Create mess_meals table */
 
-CREATE TABLE mess_meals(messid INTEGER references mess(messid), name VARCHAR(30), dayOfWeek SMALLINT, "time" time without time zone);
+CREATE TABLE mess_meals(messid INTEGER references mess(messid), mealid INTEGER references meals(id), dayOfWeek SMALLINT, "time" time without time zone);
 
-/* Adding mess meals for B mess */
+/* Adding meals to mess B */
 
-INSERT INTO mess_meals VALUES(2, 'Appam', 0, '7:30');     /* Day 0 - Monday */
-INSERT INTO mess_meals VALUES (2, 'Ghee rice', 0, '13:00');
-INSERT INTO mess_meals VALUES(2, 'Kerala rice', 0, '20:30');
+INSERT INTO mess_meals VALUES(2, 1, 0, '7:30');     /* Day 0 - Monday */
+INSERT INTO mess_meals VALUES (2, 2, 0, '13:00');
+INSERT INTO mess_meals VALUES(2, 3, 0, '20:30');
 
-INSERT INTO mess_meals VALUES(2, 'Puttu', 1, '7:30');  
-INSERT INTO mess_meals VALUES (2, 'Chapathi', 1, '13:00');
-INSERT INTO mess_meals VALUES(2, 'Porotta', 1, '20:30');
+INSERT INTO mess_meals VALUES(2, 4, 1, '7:30');  
+INSERT INTO mess_meals VALUES (2, 5, 1, '13:00');
+INSERT INTO mess_meals VALUES(2, 6, 1, '20:30');
 
-INSERT INTO mess_meals VALUES(2, 'Noolputtu', 2, '7:30');  
-INSERT INTO mess_meals VALUES (2, 'Fried rice', 2, '13:00');
-INSERT INTO mess_meals VALUES(2, 'Masala dosa', 2, '20:30');
+INSERT INTO mess_meals VALUES(2, 7, 2, '7:30');  
+INSERT INTO mess_meals VALUES (2, 8, 2, '13:00');
+INSERT INTO mess_meals VALUES(2, 9, 2, '20:30');
 
 
-INSERT INTO mess_meals VALUES(2, 'Uppuma', 3, '7:30');  
-INSERT INTO mess_meals VALUES (2, 'Noodles', 3, '13:00');
-INSERT INTO mess_meals VALUES(2, 'Pizza', 3, '20:30');
+INSERT INTO mess_meals VALUES(2, 10, 3, '7:30');  
+INSERT INTO mess_meals VALUES (2, 11, 3, '13:00');
+INSERT INTO mess_meals VALUES(2, 12, 3, '20:30');
 
-INSERT INTO mess_meals VALUES(2, 'Dosa', 4, '7:30');  
-INSERT INTO mess_meals VALUES (2, 'Chapathi', 4, '13:00');
-INSERT INTO mess_meals VALUES(2, 'Pasta', 4, '20:30');
-
-/* Create announcements table */
-
-CREATE TABLE announcements(rollno VARCHAR(10) references users(rollno), announcement VARCHAR(100), postedat TIMESTAMP DEFAULT NOW());
-
-INSERT INTO announcements VALUES('W190100', 'Hey there! It is your manager here. I hope you are all having a good day :)');
-
-INSERT INTO announcements VALUES('W190100', 'Hola folks. Lunch is going to be delayed by an hour tomorrow. My apologies');
+INSERT INTO mess_meals VALUES(2, 13, 4, '7:30');  
+INSERT INTO mess_meals VALUES (2, 14, 4, '13:00');
+INSERT INTO mess_meals VALUES(2, 15, 4, '20:30');

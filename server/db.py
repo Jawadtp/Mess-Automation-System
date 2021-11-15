@@ -12,21 +12,26 @@ def getUserInfoFromEmail(email):
     cur.close()
     return res
 
-def getUserMessFromEmail(email):
+def getUserMessFromEmail(email, role):
     cur = conn.cursor() 
-    cur.execute("SELECT messname, messid FROM mess WHERE messid = (SELECT messid FROM user_mess WHERE rollno = (SELECT rollno FROM users WHERE email=%s))",(email,))        
+
+    if role=='student':
+        cur.execute("SELECT messname, messid FROM mess WHERE messid = (SELECT messid FROM student_mess WHERE rollno = (SELECT rollno FROM users WHERE email=%s))",(email,))        
+    else:
+        cur.execute("SELECT messname, messid FROM mess WHERE messid = (SELECT messid FROM managers WHERE managerid = (SELECT rollno FROM users WHERE email=%s))",(email,))        
+
     res = cur.fetchone()
     return res
 
 def getMessDetails(messId):
     cur = conn.cursor() 
-    cur.execute("SELECT name, dayofweek, time FROM mess_meals WHERE messid=%s ORDER BY dayofweek, time;",(messId,))        
+    cur.execute("select ms.mealname, m.dayofweek, m.time from meals ms, mess_meals m where m.mealid = ms.id AND m.messid=%s",(messId,))        
     res = cur.fetchall()
     return res
 
 def getAnnouncements(messId):
     cur = conn.cursor() 
-    cur.execute("SELECT u.username, u.role, a.announcement, a.postedat FROM users u, announcements a WHERE a.rollno IN (SELECT rollno FROM user_mess WHERE messid=%s) AND a.rollno=u.rollno",(messId,))        
+    cur.execute("SELECT u.username, u.role, a.announcement, a.postedat FROM users u, announcements a WHERE a.rollno IN (SELECT managerid FROM managers WHERE messid=%s) AND a.rollno=u.rollno",(messId,))        
     res = cur.fetchall()
     cur.close()
     return res

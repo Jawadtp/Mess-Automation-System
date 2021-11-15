@@ -100,7 +100,7 @@ def announcement():
 def validate():
     email = get_jwt_identity()
     userinfo = db.getUserInfoFromEmail(email)
-    userMess = db.getUserMessFromEmail(email)
+    userMess = db.getUserMessFromEmail(email, userinfo[3])
     if not userMess: #User isn't registered to any mess. Hence, userMess is an empty tuple.
         userMess=('',999)
     userinfo = {'rollno': userinfo[0], 'name':userinfo[1], 'email': userinfo[2], 'role':userinfo[3], 'messname': userMess[0], 'messid': userMess[1]}
