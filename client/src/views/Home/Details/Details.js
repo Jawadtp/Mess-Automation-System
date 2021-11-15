@@ -110,7 +110,7 @@ const Details = () =>
 
         const response = await fetch('http://localhost:5000/messdetails', requestOptions)
         let data = await response.json()
-        data = data['meals']
+        // data = data['meals']
         
         let detailsOrganised = []
         for(var i=0; i<7; i++)

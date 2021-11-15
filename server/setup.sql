@@ -109,6 +109,27 @@ INSERT INTO mess_meals VALUES(2, 13, 4, '7:30');
 INSERT INTO mess_meals VALUES (2, 14, 4, '13:00');
 INSERT INTO mess_meals VALUES(2, 15, 4, '20:30');
 
+INSERT INTO mess_meals VALUES(1, 1, 0, '7:30');     /* Day 0 - Monday */
+INSERT INTO mess_meals VALUES (1, 2, 0, '13:00');
+INSERT INTO mess_meals VALUES(1, 3, 0, '20:30');
+
+INSERT INTO mess_meals VALUES(1, 4, 1, '7:30');  
+INSERT INTO mess_meals VALUES (1, 5, 1, '13:00');
+INSERT INTO mess_meals VALUES(1, 6, 1, '20:30');
+
+INSERT INTO mess_meals VALUES(1, 7, 2, '7:30');  
+INSERT INTO mess_meals VALUES (1, 8, 2, '13:00');
+INSERT INTO mess_meals VALUES(1, 9, 2, '20:30');
+
+
+INSERT INTO mess_meals VALUES(1, 10, 3, '7:30');  
+INSERT INTO mess_meals VALUES (1, 11, 3, '13:00');
+INSERT INTO mess_meals VALUES(1, 12, 3, '20:30');
+
+INSERT INTO mess_meals VALUES(1, 13, 4, '7:30'); 
+INSERT INTO mess_meals VALUES (1, 14, 4, '13:00');
+INSERT INTO mess_meals VALUES(1, 15, 4, '20:30');
+
 -- Create table complaints
 CREATE TABLE complaints(complaints_ID INTEGER PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER); /* 0 - Pending, 1 - Resolved */
 
