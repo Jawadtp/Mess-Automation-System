@@ -30,6 +30,11 @@ jwt = JWTManager(app)
 
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+@app.route("/messes", methods=['GET', 'POST'])
+@cross_origin()
+def getMesses():
+    messes = db.getMesses()
+    return jsonify(messes)
 
 
 @app.route("/messdetails", methods=['GET', 'POST'])
@@ -37,15 +42,16 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 def details():
     messId = request.json['messid']
     try:
+        messMealDetails = db.getMessMealDetails(messId)
         messDetails = db.getMessDetails(messId)
-        print(messDetails)
-        #return jsonify(details=messDetails)
+        studentCount = db.getMessStudentCount(messId)
+        
         meals = []
-        for meal in messDetails:
+        for meal in messMealDetails:
             meal = list(meal)
             meal[2] = str(meal[2])
             meals.append(meal)
-        return jsonify(meals)
+        return jsonify({'meals': meals, 'count':studentCount,'details':messDetails})
 
     except Exception as e:
         print(e)

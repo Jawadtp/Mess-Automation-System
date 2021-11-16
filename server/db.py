@@ -23,15 +23,35 @@ def getUserMessFromEmail(email, role):
     res = cur.fetchone()
     return res
 
-def getMessDetails(messId):
+def getMessMealDetails(messId):
     cur = conn.cursor() 
     cur.execute("select ms.mealname, m.dayofweek, m.time from meals ms, mess_meals m where m.mealid = ms.id AND m.mess_ID=%s",(messId,))        
     res = cur.fetchall()
     return res
 
+def getMessDetails(messId):
+    cur = conn.cursor() 
+    cur.execute("select m.messname, u.username from mess m, users u, managers mn where mn.manager_id=u.roll_no and mn.mess_id=m.mess_id and m.mess_id=%s",(messId,))        
+    res = cur.fetchall()
+    return res
+
+def getMessStudentCount(messId):
+    cur = conn.cursor() 
+    cur.execute("select count(roll_no) from students where mess_id=%s",(messId,))        
+    res = cur.fetchall()
+    return res[0]
+
 def getAnnouncements(messId):
     cur = conn.cursor() 
     cur.execute("SELECT u.username, u.role, a.announcement, a.posted_at FROM users u, announcements a WHERE a.roll_no IN (SELECT manager_ID FROM managers WHERE mess_ID=%s) AND a.roll_no=u.roll_no",(messId,))        
+    res = cur.fetchall()
+    cur.close()
+    return res
+
+
+def getMesses():
+    cur = conn.cursor() 
+    cur.execute("select mess_id, messname from mess where mess_id in (select mess_id from managers)") #Return all messes that currently have managers.
     res = cur.fetchall()
     cur.close()
     return res
