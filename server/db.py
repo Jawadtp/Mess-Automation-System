@@ -50,3 +50,14 @@ def updateMenu(meal,mess_id):
     # cur.execute("UPDATE MESS_MEALS SET name=%s where mess_ID=%s and dayofweek=%s and time=%s",(meal[0],mess_id,meal[1],meal[2]))
     # conn.commit()
     cur.close()
+
+def add_complaint(roll_no,mess_id,complaint):
+    cur = conn.cursor()
+    try:     
+        cur.execute('INSERT INTO complaints(complaint_description,mess_ID,roll_no) values(%s,%s,%s)',(complaint,mess_id,roll_no))
+        conn.commit()
+        cur.close()
+        return 'Success'
+    except:
+        cur.close()
+        return 'Failed'

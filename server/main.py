@@ -107,6 +107,7 @@ def validate():
     print(userinfo)
     return jsonify(userinfo)
 
+
 @app.route('/update-meals', methods = ['POST'])
 @cross_origin()
 def update_meals():
@@ -115,6 +116,18 @@ def update_meals():
     for meal in meals:
         db.updateMenu(meal,mess_id)
     return jsonify("Successfully Updated Menu")
+
+@app.route('/post-complaint', methods = ['POST'])
+@cross_origin()
+def post_complaint():
+    roll_no = request.json['rollNo']
+    mess_id = request.json['messID']
+    compalint = request.json['complaint']
+    
+    message = db.add_complaint(roll_no,mess_id,compalint)
+    print(message)
+    return jsonify(message)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
