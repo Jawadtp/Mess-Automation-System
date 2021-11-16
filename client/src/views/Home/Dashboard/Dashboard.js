@@ -22,8 +22,11 @@ const Dashboard = () =>
 
         const response = await fetch('http://localhost:5000/announcements', requestOptions)
         const data = await response.json()
+        
+        if ( data.length === 0 )
+            data.push(['','','No announcements to show'])
+
         setAnnouncements(data)
-        // console.log(data)
     }
 
     function displayAnnouncement(announcements)
