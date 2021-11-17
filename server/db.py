@@ -51,6 +51,17 @@ def updateMenu(meal,mess_id):
     # conn.commit()
     cur.close()
 
+def get_complaints(mess_id):
+    cur = conn.cursor()
+    try:     
+        cur.execute('SELECT complaint_description,roll_no FROM complaints WHERE mess_id = %s',(mess_id,))
+        res = cur.fetchall()
+        cur.close()
+        return res
+    except:
+        cur.close()
+        return 'Failed'
+
 def add_complaint(roll_no,mess_id,complaint):
     cur = conn.cursor()
     try:     

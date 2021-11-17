@@ -117,6 +117,15 @@ def update_meals():
         db.updateMenu(meal,mess_id)
     return jsonify("Successfully Updated Menu")
 
+@app.route('/get-complaints', methods = ['POST'])
+@cross_origin()
+def get_complaints():
+    mess_id = request.json['messID']
+    
+    complaints = db.get_complaints(mess_id)
+    print(complaints)
+    return jsonify(complaints)
+
 @app.route('/post-complaint', methods = ['POST'])
 @cross_origin()
 def post_complaint():
