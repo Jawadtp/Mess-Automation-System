@@ -169,6 +169,15 @@ def update_complaint():
     message = db.update_complaint(compalint_id)
     print(message)
     return jsonify(message)
+
+@app.route('/post-announcement', methods = ['POST'])
+@cross_origin()
+def post_announcement():
+    announcement = request.json['announcement']
+    manager_id = request.json['managerID']
+    message = db.post_announcement(announcement,manager_id)
+    print(message)
+    return jsonify(message)
     
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)

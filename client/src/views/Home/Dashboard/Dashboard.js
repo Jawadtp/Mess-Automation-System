@@ -61,7 +61,7 @@ const Dashboard = () =>
                                 {announcement[1]}
                             </div> */}
                             <div className="annTime text-muted">
-                                {announcement[3]}
+                                {announcement[3].slice(0,-17)}
                             </div>
                             <div className="annContent">
                                 {announcement[2]}

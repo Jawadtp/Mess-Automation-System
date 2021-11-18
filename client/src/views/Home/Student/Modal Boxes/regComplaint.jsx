@@ -31,7 +31,7 @@ function RegComplaint(props){
         btn.value = 'Done';
         btn.style.marginTop = '2rem'
 
-        document.querySelector('.submitComplaint').style.display = 'none';
+        document.querySelector('.submit-complaint').style.display = 'none';
 
     }
 
@@ -49,7 +49,7 @@ function RegComplaint(props){
                                 <input type="button" class="form-control btn btn-primary" value="Cancel" onClick={() => props.changeModal('none')} />
                             </div>
                             <div class="col-auto">
-                                <input type="button" class="form-control btn btn-primary submitComplaint" value="Submit" onClick={() => {
+                                <input type="button" class="form-control btn btn-primary submit-complaint" value="Submit" onClick={() => {
                                     let complaint = document.getElementsByTagName('textarea')[0].value;
                                     submitComplaint(complaint)}} />
                             </div>

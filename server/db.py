@@ -56,7 +56,7 @@ def getRegRequest(rollno):
 
 def getAnnouncements(messId):
     cur = conn.cursor() 
-    cur.execute("SELECT u.username, u.role, a.announcement, a.posted_at FROM users u, announcements a WHERE a.roll_no IN (SELECT manager_ID FROM managers WHERE mess_ID=%s) AND a.roll_no=u.roll_no",(messId,))        
+    cur.execute("SELECT u.username, u.role, a.announcement, a.posted_at FROM users u, announcements a WHERE a.roll_no IN (SELECT manager_ID FROM managers WHERE mess_ID=%s) AND a.roll_no=u.roll_no ORDER BY posted_at DESC",(messId,))        
     res = cur.fetchall()
     cur.close()
     return res
@@ -110,6 +110,17 @@ def update_complaint(complaint_id):
     cur = conn.cursor()
     try:
         cur.execute('UPDATE complaints SET status=1 where complaint_id = %s',(complaint_id,))
+        conn.commit()
+        cur.close()
+        return 'Success'
+    except:
+        cur.close()
+        return 'Failed'
+
+def post_announcement(announcement,manager_id):
+    cur = conn.cursor()
+    try:
+        cur.execute('INSERT INTO announcements (roll_no,announcement) VALUES (%s,%s)',(manager_id,announcement))
         conn.commit()
         cur.close()
         return 'Success'
