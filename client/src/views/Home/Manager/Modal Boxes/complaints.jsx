@@ -36,6 +36,8 @@ function Complaints(props){
         }
 
         const response = await fetch('http://localhost:5000/update-complaint', requestOptions);
+
+        const data = await response.json();
     }
 
     function dislpayComplaints(complaints){
@@ -45,7 +47,10 @@ function Complaints(props){
                 <td>{complaint[1]}</td>
                 <td>{complaint[2]}</td>
                 <td>
-                    <input type="button" id={`${complaint[0]}`} className="btn btn-primary" value='Resolve' onClick={resolveComplaint(complaint)}/>
+                    {complaint[0] === 0? 
+                    <input type="button" id={`${complaint[0]}`} className="btn btn-primary" value='Resolve' onClick={() => resolveComplaint(complaint)}/>
+                    :
+                    <div className="text-muted text-center">Resolved</div>}
                 </td>
             </tr>)
             }))

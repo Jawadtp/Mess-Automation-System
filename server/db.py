@@ -75,8 +75,8 @@ def add_complaint(roll_no,mess_id,complaint):
 
 def update_complaint(complaint_id):
     cur = conn.cursor()
-    try:     
-        cur.execute('UPDATE complaints SET status=1 where complaint_id = %s',(complaint_id))
+    try:
+        cur.execute('UPDATE complaints SET status=1 where complaint_id = %s',(complaint_id,))
         conn.commit()
         cur.close()
         return 'Success'
