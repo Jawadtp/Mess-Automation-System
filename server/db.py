@@ -74,7 +74,7 @@ def updateMenu(meal,mess_id):
 def get_complaints(mess_id):
     cur = conn.cursor()
     try:     
-        cur.execute('SELECT complaint_description,roll_no FROM complaints WHERE mess_id = %s',(mess_id,))
+        cur.execute('SELECT complaint_id, complaint_description,roll_no FROM complaints WHERE mess_id = %s',(mess_id,))
         res = cur.fetchall()
         cur.close()
         return res
@@ -86,6 +86,17 @@ def add_complaint(roll_no,mess_id,complaint):
     cur = conn.cursor()
     try:     
         cur.execute('INSERT INTO complaints(complaint_description,mess_ID,roll_no) values(%s,%s,%s)',(complaint,mess_id,roll_no))
+        conn.commit()
+        cur.close()
+        return 'Success'
+    except:
+        cur.close()
+        return 'Failed'
+
+def update_complaint(complaint_id):
+    cur = conn.cursor()
+    try:     
+        cur.execute('UPDATE complaints SET status=1 where complaint_id = %s',(complaint_id))
         conn.commit()
         cur.close()
         return 'Success'

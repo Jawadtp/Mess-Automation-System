@@ -140,6 +140,13 @@ def post_complaint():
     compalint = request.json['complaint']
     
     message = db.add_complaint(roll_no,mess_id,compalint)
+    return jsonify(message)
+
+@app.route('/update-complaint', methods = ['POST'])
+@cross_origin()
+def update_complaint():
+    compalint_id = request.json['complaintID']
+    message = db.update_complaint(compalint_id)
     print(message)
     return jsonify(message)
 
