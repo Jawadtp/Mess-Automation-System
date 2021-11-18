@@ -30,22 +30,49 @@ jwt = JWTManager(app)
 
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+@app.route("/messes", methods=['GET', 'POST'])
+@cross_origin()
+def getMesses():
+    messes = db.getMesses()
+    return jsonify(messes)
 
+@app.route("/addregrequest", methods=['POST'])
+@cross_origin()
+def addRegRequest():
+    rollno = request.json['rollno']
+    messid = request.json['messid']
+    try:
+        db.addRegRequest(messid, rollno)
+        return jsonify('success')
+    except Exception as e:
+        print(e)
+        return jsonify(e)
+
+@app.route("/regreq", methods=['POST'])
+@cross_origin()
+def regReq():
+    rollno = request.json['rollno']
+    req=db.getRegRequest(rollno)
+    if(req is None):
+        return jsonify('no request')
+    return jsonify(req[0])
 
 @app.route("/messdetails", methods=['GET', 'POST'])
 @cross_origin()
 def details():
     messId = request.json['messid']
+    # do print(messId)
     try:
+        messMealDetails = db.getMessMealDetails(messId)
         messDetails = db.getMessDetails(messId)
-        print(messDetails)
-        #return jsonify(details=messDetails)
+        studentCount = db.getMessStudentCount(messId)
+        
         meals = []
-        for meal in messDetails:
+        for meal in messMealDetails:
             meal = list(meal)
             meal[2] = str(meal[2])
             meals.append(meal)
-        return jsonify(meals)
+        return jsonify({'meals': meals, 'count':studentCount,'details':messDetails})
 
     except Exception as e:
         print(e)
@@ -107,7 +134,6 @@ def validate():
     print(userinfo)
     return jsonify(userinfo)
 
-
 @app.route('/update-meals', methods = ['POST'])
 @cross_origin()
 def update_meals():
@@ -116,34 +142,6 @@ def update_meals():
     for meal in meals:
         db.updateMenu(meal,mess_id)
     return jsonify("Successfully Updated Menu")
-
-@app.route('/get-complaints', methods = ['POST'])
-@cross_origin()
-def get_complaints():
-    mess_id = request.json['messID']
-    
-    complaints = db.get_complaints(mess_id)
-    print(complaints)
-    return jsonify(complaints)
-
-@app.route('/post-complaint', methods = ['POST'])
-@cross_origin()
-def post_complaint():
-    roll_no = request.json['rollNo']
-    mess_id = request.json['messID']
-    compalint = request.json['complaint']
-    
-    message = db.add_complaint(roll_no,mess_id,compalint)
-    return jsonify(message)
-
-@app.route('/update-complaint', methods = ['POST'])
-@cross_origin()
-def update_complaint():
-    compalint_id = request.json['complaintID']
-    message = db.update_complaint(compalint_id)
-    print(message)
-    return jsonify(message)
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)

@@ -1,10 +1,38 @@
 import React, {useEffect, useState} from 'react'
+import MessDetails from './MessDetails'
+import './MessReg.css'
+import { useSelector } from 'react-redux'
 
 const RegMenu = (props) => 
 {
+    const user = useSelector((state)=> state.user.value)
 
     const [messes, setMesses] = useState([])
-    const [selectedMess, setSelectedMess] = useState({messname:'', id:-1})
+    const [selectedMess, setSelectedMess] = useState(-1)
+
+    async function sendRegRequest()
+    {
+        const requestOptions = 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ rollno: user['rollno'], messid: selectedMess })
+        }
+
+        let response = await fetch('http://localhost:5000/addregrequest', requestOptions)
+
+        console.log('Response: ', response)
+
+        const data = await response.json()
+
+        if(data=='success')
+        {
+
+            props.showMessRegModal(false)
+            props.getRegRequest()
+        }
+
+    }
 
     async function getAllMesses()
     {
@@ -33,15 +61,14 @@ const RegMenu = (props) =>
 
                         <div className="modal-body">
                             {!messes.length?'Loading available messes..':
-                                <select class="form-select" id="messSelect" onChange={()=>{setSelectedMess({id: document.getElementById("messSelect").value, messname: document.getElementById("messSelect").options[ document.getElementById("messSelect").selectedIndex].text})}}>
+                                <select class="form-select" id="messSelect" onChange={()=>{setSelectedMess(document.getElementById("messSelect").value)}}>
                                     <option value="-1" selected>Choose a mess</option>
                                     {messes.map((mess)=> <option value={mess[0]}>{mess[1]}</option>)}
                                 </select>
                             }
 
-                            {selectedMess['messname']}
-
-                            {selectedMess['id']}
+                            {selectedMess==-1?'':<MessDetails messid={selectedMess}/>}
+                            
                         </div>
                         <div id="add-extras-container">
                             <div class="row justify-content-center mt-1">
@@ -49,7 +76,7 @@ const RegMenu = (props) =>
                                     <input type="button" class="form-control btn btn-primary" value="Hide" onClick={()=>props.showMessRegModal(false)}/>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="button" class="form-control btn btn-primary" value="Register" />
+                                    <input type="button" class="form-control btn btn-primary" value="Register" onClick={sendRegRequest}/>
                                 </div>
                             </div>
                         </div>
