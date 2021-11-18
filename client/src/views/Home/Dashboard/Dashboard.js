@@ -10,6 +10,7 @@ const Dashboard = () =>
     const user = useSelector((state)=> state.user.value)
     const [announcements, setAnnouncements] = useState([])
     const [isMessRegModalShown, showMessRegModal] = useState(false)
+    const [regReq, setRegReq] = useState('loading')
 
     async function fetchAnnouncements()
     {
@@ -27,6 +28,23 @@ const Dashboard = () =>
             data.push(['','','No announcements to show'])
 
         setAnnouncements(data)
+    }
+
+    async function getRegRequest()
+    {
+        const requestOptions = 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ rollno: user['rollno'] })
+        }
+
+        const response = await fetch('http://localhost:5000/regreq', requestOptions)
+
+        console.log('reg request: ', response)
+        const data = await response.json()
+        console.log('ref req data: ',data)
+        setRegReq(data)
     }
 
     function displayAnnouncement(announcements)
@@ -61,7 +79,10 @@ const Dashboard = () =>
     {
         if(user['messname']==='' && user['role']==='student')
             return <div className='registerMess'>
-                <button type="button" class="btn btn-primary" onClick={()=>{showMessRegModal(true)}}>Register in a mess</button>
+                {regReq==='loading'?'Loading':regReq=='no request'?
+                <button type="button" class="btn btn-primary" onClick={()=>{showMessRegModal(true)}}>Register in a mess</button>:
+                'Registration request to be processed for mess '+regReq
+                }
             </div>
 
         else if(user['messname']==='' && user['role']==='manager')
@@ -75,6 +96,7 @@ const Dashboard = () =>
     useEffect(() => 
     {
        fetchAnnouncements()
+       getRegRequest()
     },[]);
 
     return (
@@ -148,7 +170,7 @@ const Dashboard = () =>
             </div>
         
 
-            {isMessRegModalShown?<RegMenu showMessRegModal={showMessRegModal}/>:''}
+            {isMessRegModalShown?<RegMenu showMessRegModal={showMessRegModal} getRegRequest={getRegRequest}/>:''}
             
             <div className='footer'></div>
         </div>

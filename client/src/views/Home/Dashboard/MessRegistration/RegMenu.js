@@ -1,11 +1,38 @@
 import React, {useEffect, useState} from 'react'
 import MessDetails from './MessDetails'
 import './MessReg.css'
+import { useSelector } from 'react-redux'
+
 const RegMenu = (props) => 
 {
+    const user = useSelector((state)=> state.user.value)
 
     const [messes, setMesses] = useState([])
     const [selectedMess, setSelectedMess] = useState(-1)
+
+    async function sendRegRequest()
+    {
+        const requestOptions = 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ rollno: user['rollno'], messid: selectedMess })
+        }
+
+        let response = await fetch('http://localhost:5000/addregrequest', requestOptions)
+
+        console.log('Response: ', response)
+
+        const data = await response.json()
+
+        if(data=='success')
+        {
+
+            props.showMessRegModal(false)
+            props.getRegRequest()
+        }
+
+    }
 
     async function getAllMesses()
     {
@@ -49,7 +76,7 @@ const RegMenu = (props) =>
                                     <input type="button" class="form-control btn btn-primary" value="Hide" onClick={()=>props.showMessRegModal(false)}/>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="button" class="form-control btn btn-primary" value="Register" />
+                                    <input type="button" class="form-control btn btn-primary" value="Register" onClick={sendRegRequest}/>
                                 </div>
                             </div>
                         </div>

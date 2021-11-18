@@ -41,6 +41,19 @@ def getMessStudentCount(messId):
     res = cur.fetchall()
     return res[0]
 
+def addRegRequest(messId, rollno):
+    cur = conn.cursor() 
+    cur.execute("INSERT INTO reg_requests(roll_no, mess_id) VALUES (%s,%s)",(rollno, messId))        
+    conn.commit()
+    cur.close()
+    return True
+
+def getRegRequest(rollno):
+    cur = conn.cursor() 
+    cur.execute("select messname from mess where mess_id = (select mess_id from reg_requests where roll_no=%s)",(rollno,))        
+    res = cur.fetchone()
+    return res
+
 def getAnnouncements(messId):
     cur = conn.cursor() 
     cur.execute("SELECT u.username, u.role, a.announcement, a.posted_at FROM users u, announcements a WHERE a.roll_no IN (SELECT manager_ID FROM managers WHERE mess_ID=%s) AND a.roll_no=u.roll_no",(messId,))        

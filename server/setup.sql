@@ -36,6 +36,7 @@ CREATE TABLE managers(mess_ID INTEGER references mess(mess_ID), manager_ID VARCH
 
 INSERT INTO managers VALUES (2, 'W190100'); /* Tom Cruise manages mess B */
 
+INSERT INTO managers VALUES (1, 'W190101'); /* Mammootty manages mess A */
 
 /* Create students table */
 
@@ -109,36 +110,19 @@ INSERT INTO mess_meals VALUES(2, 13, 4, '7:30');
 INSERT INTO mess_meals VALUES (2, 14, 4, '13:00');
 INSERT INTO mess_meals VALUES(2, 15, 4, '20:30');
 
-INSERT INTO mess_meals VALUES(1, 1, 0, '7:30');     /* Day 0 - Monday */
-INSERT INTO mess_meals VALUES (1, 2, 0, '13:00');
-INSERT INTO mess_meals VALUES(1, 3, 0, '20:30');
-
-INSERT INTO mess_meals VALUES(1, 4, 1, '7:30');  
-INSERT INTO mess_meals VALUES (1, 5, 1, '13:00');
-INSERT INTO mess_meals VALUES(1, 6, 1, '20:30');
-
-INSERT INTO mess_meals VALUES(1, 7, 2, '7:30');  
-INSERT INTO mess_meals VALUES (1, 8, 2, '13:00');
-INSERT INTO mess_meals VALUES(1, 9, 2, '20:30');
-
-
-INSERT INTO mess_meals VALUES(1, 10, 3, '7:30');  
-INSERT INTO mess_meals VALUES (1, 11, 3, '13:00');
-INSERT INTO mess_meals VALUES(1, 12, 3, '20:30');
-
-INSERT INTO mess_meals VALUES(1, 13, 4, '7:30'); 
-INSERT INTO mess_meals VALUES (1, 14, 4, '13:00');
-INSERT INTO mess_meals VALUES(1, 15, 4, '20:30');
-
 -- Create table complaints
-CREATE TABLE complaints(complaint_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER DEFAULT 0); /* 0 - Pending, 1 - Resolved */
+CREATE TABLE complaints(complaints_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER); /* 0 - Pending, 1 - Resolved */
 
 -- insert values in complaints table
-INSERT INTO complaints(complaint_description,mess_ID,roll_no) VALUES('Mess is not kept clean', 1 ,'B190534CS');
-INSERT INTO complaints(complaint_description,mess_ID,roll_no) VALUES('Bad behaviour of hostel staff', 1 ,'B190837CS');
+INSERT INTO complaints(complaints_ID, complaint_description,mess_ID,roll_no,status) VALUES(1, 'Mess is not kept clean', 1 ,'B190534CS', 0);
+INSERT INTO complaints(complaints_ID, complaint_description,mess_ID,roll_no,status) VALUES(2, 'Bad behaviour of hostel staff', 1 ,'B190837CS', 0);
 
 -- Create table fees
 CREATE TABLE fees(roll_no VARCHAR(10) PRIMARY KEY references students(roll_no),pending_fees INTEGER,extras INTEGER);
 
 -- Create table leave_requests
 CREATE TABLE leave_requests(roll_no VARCHAR(10) references students(roll_no), start_date DATE DEFAULT CURRENT_DATE, end_date DATE, manager_ID VARCHAR(10) references managers(manager_ID), PRIMARY KEY(roll_no,start_date));
+
+
+/* Create table reg_requests */
+CREATE TABLE reg_requests(request_ID SERIAL PRIMARY KEY, roll_no VARCHAR(10) references users(roll_no), mess_ID INTEGER references mess(mess_ID));
