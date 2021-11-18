@@ -131,7 +131,7 @@ INSERT INTO mess_meals VALUES (1, 14, 4, '13:00');
 INSERT INTO mess_meals VALUES(1, 15, 4, '20:30');
 
 -- Create table complaints
-CREATE TABLE complaints(complaints_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER DEFAULT 0); /* 0 - Pending, 1 - Resolved */
+CREATE TABLE complaints(complaint_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER DEFAULT 0); /* 0 - Pending, 1 - Resolved */
 
 -- insert values in complaints table
 INSERT INTO complaints(complaint_description,mess_ID,roll_no) VALUES('Mess is not kept clean', 1 ,'B190534CS');

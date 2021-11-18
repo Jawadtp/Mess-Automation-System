@@ -26,14 +26,26 @@ function Complaints(props){
         
     }
 
+    async function resolveComplaint(complaint){
+        
+        const requestOptions = 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ complaintID: complaint[0] })
+        }
+
+        const response = await fetch('http://localhost:5000/update-complaint', requestOptions);
+    }
+
     function dislpayComplaints(complaints){
         return(complaints.map( (complaint) => {
                                             
             return(<tr>
-                <td>{complaint[0]}</td>
                 <td>{complaint[1]}</td>
+                <td>{complaint[2]}</td>
                 <td>
-                    <input type="button" className="btn btn-primary" value='Clear'/>
+                    <input type="button" id={`${complaint[0]}`} className="btn btn-primary" value='Resolve' onClick={resolveComplaint(complaint)}/>
                 </td>
             </tr>)
             }))
@@ -43,7 +55,7 @@ function Complaints(props){
 
     return(
             <div className="modal-container">
-                <div className="modal-box col-10 col-sm-6">
+                <div className="modal-box col-10 col-sm-8 col-md-6">
                     <h2><strong>Complaints</strong></h2>
 
                     <div id="complaints-container mt-1">

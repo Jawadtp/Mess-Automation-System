@@ -1,0 +1,15 @@
+.complaints-table-wrapper{
+    padding: 0;
+    margin: 0;
+    border: 0.15rem solid var(--accent);
+    overflow: scroll;
+}
+
+.complaints-table-wrapper .table{
+    margin: 0;
+}
+
+.complaints-table input[type='button']{
+    display: block;
+    margin: auto;
+}
