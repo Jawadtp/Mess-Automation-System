@@ -111,11 +111,11 @@ INSERT INTO mess_meals VALUES (2, 14, 4, '13:00');
 INSERT INTO mess_meals VALUES(2, 15, 4, '20:30');
 
 -- Create table complaints
-CREATE TABLE complaints(complaints_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER); /* 0 - Pending, 1 - Resolved */
+CREATE TABLE complaints(complaint_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER); /* 0 - Pending, 1 - Resolved */
 
 -- insert values in complaints table
-INSERT INTO complaints(complaints_ID, complaint_description,mess_ID,roll_no,status) VALUES(1, 'Mess is not kept clean', 1 ,'B190534CS', 0);
-INSERT INTO complaints(complaints_ID, complaint_description,mess_ID,roll_no,status) VALUES(2, 'Bad behaviour of hostel staff', 1 ,'B190837CS', 0);
+INSERT INTO complaints(complaint_ID, complaint_description,mess_ID,roll_no,status) VALUES(1, 'Mess is not kept clean', 1 ,'B190534CS', 0);
+INSERT INTO complaints(complaint_ID, complaint_description,mess_ID,roll_no,status) VALUES(2, 'Bad behaviour of hostel staff', 1 ,'B190837CS', 0);
 
 -- Create table fees
 CREATE TABLE fees(roll_no VARCHAR(10) PRIMARY KEY references students(roll_no),pending_fees INTEGER,extras INTEGER);

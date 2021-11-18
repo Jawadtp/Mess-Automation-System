@@ -143,6 +143,33 @@ def update_meals():
         db.updateMenu(meal,mess_id)
     return jsonify("Successfully Updated Menu")
 
+@app.route('/get-complaints', methods = ['POST'])
+@cross_origin()
+def get_complaints():
+    mess_id = request.json['messID']
+    
+    complaints = db.get_complaints(mess_id)
+    print(complaints)
+    return jsonify(complaints)
+
+@app.route('/post-complaint', methods = ['POST'])
+@cross_origin()
+def post_complaint():
+    roll_no = request.json['rollNo']
+    mess_id = request.json['messID']
+    compalint = request.json['complaint']
+    
+    message = db.add_complaint(roll_no,mess_id,compalint)
+    return jsonify(message)
+
+@app.route('/update-complaint', methods = ['POST'])
+@cross_origin()
+def update_complaint():
+    compalint_id = request.json['complaintID']
+    message = db.update_complaint(compalint_id)
+    print(message)
+    return jsonify(message)
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 
