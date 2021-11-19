@@ -25,7 +25,7 @@ const Dashboard = () =>
         const data = await response.json()
         
         if ( data.length === 0 )
-            data.push(['','','No announcements to show'])
+            data.push(['','','No announcements to show',''])
 
         setAnnouncements(data)
     }
