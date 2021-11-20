@@ -1,5 +1,5 @@
 import React from 'react';
-import './modal.css';
+import '../modal.css';
 import RequestLeave from './Modal Boxes/requestLeave';
 import RegComplaint from './Modal Boxes/regComplaint';
 

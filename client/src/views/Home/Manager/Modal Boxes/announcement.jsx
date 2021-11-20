@@ -39,7 +39,7 @@ function Announcement(props){
                     <div class="modalContent">
                             
                         <h2><strong>Create Announcement</strong></h2>
-                        <textarea className="m-2 " cols="30" rows="10" placeholder="Announcement"></textarea>
+                        <textarea cols="30" rows="10" placeholder="Announcement"></textarea>
                         
                         <div className="row justify-content-center">
                             <div class="col-auto">

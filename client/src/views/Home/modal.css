@@ -1,10 +1,11 @@
 .custom-modal{
+    position: fixed;
     height: 100vh;
     width: 100vw;
-    position: absolute;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
+    padding-bottom: 7rem;
 }
 
 .modal-container{

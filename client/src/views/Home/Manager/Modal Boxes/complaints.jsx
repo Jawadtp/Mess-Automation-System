@@ -20,7 +20,7 @@ function Complaints(props){
         let response = await fetch('http://localhost:5000/get-complaints', requestOptions)
 
         const complaints = await response.json()
-        console.log(complaints)
+        // console.log(complaints)
 
         setComplaints(complaints)
         
@@ -64,7 +64,7 @@ function Complaints(props){
                     <h2><strong>Complaints</strong></h2>
 
                     <div id="complaints-container mt-1">
-                        <div class="row justify-content-center">
+                        <div class="d-flex flex-column align-items-center">
 
                             <div className="complaints-table row justify-content-center mb-2">
                                 <div className="complaints-table-wrapper col-12">
@@ -83,7 +83,7 @@ function Complaints(props){
                                 </div>
                             </div>
 
-                            <div class="col-auto">
+                            <div class="w-25">
                                 <input type="button" class="form-control btn btn-primary" value="Done" onClick={() => props.changeModal('none')} />
                             </div>
                         </div>

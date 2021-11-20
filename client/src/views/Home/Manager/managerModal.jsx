@@ -5,7 +5,7 @@ import AddExtras from './Modal Boxes/addExtras';
 import EndFeePeriod from './Modal Boxes/endFeePeriod';
 import Announcement from "./Modal Boxes/announcement"
 import Complaints from './Modal Boxes/complaints';
-import './modal.css'
+import '../modal.css'
 
 
 function Modal(props){

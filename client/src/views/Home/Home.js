@@ -4,7 +4,7 @@ import Dashboard from './Dashboard/Dashboard'
 import Details from './Details/Details'
 import Header from './header/header'
 import Sidebar from './Sidebar/Sidebar'
-import Manage from './Manager/manage'
+import Manage from './Manager/managerManage'
 import StudentManage from './Student/studentManage'
 import './Home.css'
 
@@ -35,6 +35,7 @@ const Home = () =>
 
         <div className="homeWrapper">
             <Sidebar view={view} setView={setView}/>
+            
             <div className="homeContent">
                 <Header/>
                 <div className='path'>
@@ -42,6 +43,8 @@ const Home = () =>
                 </div>
                 {renderView(view)}
             </div>
+
+            {/* <div className="footer"></div> */}
         </div>
     )
 }

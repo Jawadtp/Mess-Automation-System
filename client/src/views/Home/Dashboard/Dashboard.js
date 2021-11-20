@@ -49,6 +49,7 @@ const Dashboard = () =>
 
     function displayAnnouncement(announcements)
     {
+        console.log(announcements)
         return(
             announcements.map((announcement) => {
                 return <tr>

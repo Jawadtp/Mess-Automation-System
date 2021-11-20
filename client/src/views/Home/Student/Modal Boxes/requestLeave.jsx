@@ -35,42 +35,41 @@ function RequestLeave(props){
 
     return(
             <div className="modal-container">
-                <div className="modal-box">
+                <div className="modal-box col-10 col-sm-8 col-md-6">
 
                     <div className="modalContent">
-                            <div class="d-flex flex-column align-items-center mt-1">
-                            <h2><strong>Request Leave</strong></h2>
-                            <div className="calenders row">
-                                <div className="col-auto ">
-                                    <label>Starting Date:</label><br />
-                                    <input type="date" className='start-date'/>
-                                </div>
-                                <div className="col-auto">
-                                    <label>End Date:</label><br />
-                                    <input type="date" className='end-date'/>
-                                </div>
+                            
+                        <h2><strong>Request Leave</strong></h2>
+                        <div className="calenders row">
+                            <div className="col-auto ">
+                                <label>Starting Date:</label><br />
+                                <input type="date" className='start-date'/>
                             </div>
-                            <div className='reason mb-3'>
-                                <textarea className="leave-req-text-area" cols="30" rows="10" placeholder="Enter reason"/>
+                            <div className="col-auto">
+                                <label>End Date:</label><br />
+                                <input type="date" className='end-date'/>
                             </div>
-                            <div class="row">
-                                <div className="col">
-                                    <input type="button" class="form-control btn btn-primary" value="Cancel" onClick={() => props.changeModal('none')} />
-                                </div>
-                                <div className="col">
-                                    <input type="button" class="form-control btn btn-primary submit-request" value="Submit" onClick={() => {
-                                        let startDate = document.querySelector('.start-date').value;
-                                        let endDate = document.querySelector('.end-date').value;
-                                        let reason = document.getElementsByClassName('leave-req-text-area')[0].value
-                                        let request = {
-                                            startDate: startDate,
-                                            endDate: endDate,
-                                            reason: reason
-                                        }
-                                        submitLeaveRequest(request)}} />
-                                </div>
-                    
+                        </div>
+                        <div className='reason mb-3'>
+                            <textarea className="leave-req-text-area" cols="30" rows="10" placeholder="Enter reason"/>
+                        </div>
+                        <div class="row">
+                            <div className="col">
+                                <input type="button" class="form-control btn btn-primary" value="Cancel" onClick={() => props.changeModal('none')} />
                             </div>
+                            <div className="col">
+                                <input type="button" class="form-control btn btn-primary submit-request" value="Submit" onClick={() => {
+                                    let startDate = document.querySelector('.start-date').value;
+                                    let endDate = document.querySelector('.end-date').value;
+                                    let reason = document.getElementsByClassName('leave-req-text-area')[0].value
+                                    let request = {
+                                        startDate: startDate,
+                                        endDate: endDate,
+                                        reason: reason
+                                    }
+                                    submitLeaveRequest(request)}} />
+                            </div>
+                
                         </div>
                     </div>
                     

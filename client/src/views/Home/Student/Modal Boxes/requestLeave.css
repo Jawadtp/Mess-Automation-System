@@ -2,6 +2,10 @@
     margin-bottom: 1.5rem;
 }
 
+.reason{
+    width: 100%;
+}
+
 .leave-req-text-area{
     width: 100%;
     display: block;

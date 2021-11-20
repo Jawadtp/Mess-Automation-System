@@ -42,7 +42,7 @@ function RegComplaint(props){
                     <div class="modalContent">
                             
                         <h2><strong>Register Complaint</strong></h2>
-                        <textarea className="m-2 " cols="30" rows="10" placeholder="Describe the complaint"></textarea>
+                        <textarea cols="30" rows="10" placeholder="Describe the complaint"></textarea>
                         
                         <div className="row justify-content-center">
                             <div class="col-auto">

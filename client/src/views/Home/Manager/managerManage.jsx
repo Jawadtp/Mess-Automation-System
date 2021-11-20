@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
-import './manage.css'
-import Modal from './modal'
+import './managerManage.css'
+import Modal from './managerModal'
 
 function Manage(){
 
