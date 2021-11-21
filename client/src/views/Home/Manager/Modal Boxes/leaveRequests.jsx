@@ -41,33 +41,44 @@ function LeaveRequests(props){
         return(leaveRequests.map( (request) => {
                                             
             return(<tr>
-                <td>{request['roll_no']}</td>
-                <td>{request['start_date'].slice(5,-12)}</td>
-                <td>{request['end_date'].slice(5,-12)}</td>
-                <td>{request['reason']}</td>
-                <td>
+                <td style={{minWidth: '7rem'}}>{request['roll_no']}</td>
+                <td style={{minWidth: '7rem'}} >{request['start_date'].slice(0,-17)}</td>
+                <td style={{minWidth: '7rem'}}>{request['end_date'].slice(0,-17)}</td>
+                <td style={{minWidth: '20rem'}}>{request['reason']}</td>
+                <td >
                     {request['status'] === 0? 
                     <div className="d-flex flex-column align-items-center">
-                        <input type="button" id={`${request[0]}`} className="btn btn-primary m-1" value='Approve' onClick={() => requestAction(request,1)}/>
-
-                        <input type="button" id={`${request[0]}`} className="btn btn-primary" value='Reject' onClick={() => requestAction(request,-1)}/>
+                        <input type="button" id={`${request[0]}`} className="leave-request-action-buttons btn btn-primary m-1" value='Approve' onClick={(e) =>requestAction(e,request,1)}
+                        />
+                        <div className="temp-status text-muted"></div>
+                        <input type="button" id={`${request[0]}`} className="leave-request-action-buttons btn btn-primary" value='Reject' onClick={(e) => requestAction(e,request,-1)}/>
                     </div>
                     :request['status'] === 1?
-                    <div className="text-muted text-center">Accepted</div>:<div className="text-muted text-center">Rejected</div>}
+                    <div className="text-muted text-center">Approved</div>:<div className="text-muted text-center">Rejected</div>}
                 </td>
             </tr>)
             }))
     }
 
-    async function requestAction(request,status){
+    async function requestAction(e,request,status){
 
+        let parent = e.target.parentElement;
+        parent.children[0].setAttribute('hidden','true');
+        parent.children[2].setAttribute('hidden','true');
+        
+        if (status === 1)
+            parent.children[1].innerHTML = 'Approved'
+        else
+            parent.children[1].innerHTML = 'Rejected'
+        
         const requestOptions = 
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 rollNo: request['roll_no'],
-                startDate: request['start_date']
+                startDate: request['start_date'],
+                status: status
             })
         }
 
@@ -87,8 +98,7 @@ function LeaveRequests(props){
 
                         <div class="d-flex flex-column align-items-center">
 
-                            <div className="complaints-table row justify-content-center mb-2">
-                                <div className="complaints-table-wrapper col-12">
+                                <div className="table-wrapper">
                                     <table className="table table-striped">
                                         <thead>
                                             <tr>
@@ -104,7 +114,6 @@ function LeaveRequests(props){
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
 
                             <div class="w-25">
                                 <input type="button" class="form-control btn btn-primary" value="Done" onClick={() => props.changeModal('none')} />

@@ -17,7 +17,17 @@
 
 .modal-box{
     background-color: white;
-    padding: 3rem;
+    padding: 3rem 1.5rem;
     border-radius: 5px;
     box-shadow: 10px 6px 20px rgb(0 0 0 / 36%);
+}
+
+.table-wrapper{
+    width: 100%;
+    overflow: scroll;
+    margin:0 0 1rem;
+}
+
+th,td{
+    text-align: center;
 }

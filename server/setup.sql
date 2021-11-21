@@ -111,7 +111,7 @@ INSERT INTO mess_meals VALUES (2, 14, 4, '13:00');
 INSERT INTO mess_meals VALUES(2, 15, 4, '20:30');
 
 -- Create table complaints
-CREATE TABLE complaints(complaint_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER); /* 0 - Pending, 1 - Resolved */
+CREATE TABLE complaints(complaint_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER DEFAULT 0); /* 0 - Pending, 1 - Resolved */
 
 -- insert values in complaints table
 INSERT INTO complaints(complaint_ID, complaint_description,mess_ID,roll_no,status) VALUES(1, 'Mess is not kept clean', 1 ,'B190534CS', 0);
@@ -121,8 +121,8 @@ INSERT INTO complaints(complaint_ID, complaint_description,mess_ID,roll_no,statu
 CREATE TABLE fees(roll_no VARCHAR(10) PRIMARY KEY references students(roll_no),pending_fees INTEGER,extras INTEGER);
 
 -- Create table leave_requests
-CREATE TABLE leave_requests(roll_no VARCHAR(10) references students(roll_no), start_date DATE DEFAULT CURRENT_DATE, end_date DATE, manager_ID VARCHAR(10) references managers(manager_ID), PRIMARY KEY(roll_no,start_date));
-
+CREATE TABLE leave_requests(roll_no VARCHAR(10) references students(roll_no), start_date DATE DEFAULT CURRENT_DATE, end_date DATE,reason TEXT, manager_ID VARCHAR(10) references managers(manager_ID), status INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(roll_no,start_date));
+-- status 0 -> Pending, 1 -> Approved, -1 -> Rejected
 
 /* Create table reg_requests */
 CREATE TABLE reg_requests(request_ID SERIAL PRIMARY KEY, roll_no VARCHAR(10) references users(roll_no), mess_ID INTEGER references mess(mess_ID));

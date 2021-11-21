@@ -31,7 +31,7 @@ function RegComplaint(props){
         btn.value = 'Done';
         btn.style.marginTop = '2rem'
 
-        document.querySelector('.submit-complaint').style.display = 'none';
+        document.querySelector('.submit-complaint').parentElement.style.display = 'none';
 
     }
 

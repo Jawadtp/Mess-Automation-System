@@ -38,17 +38,24 @@ function Complaints(props){
         const response = await fetch('http://localhost:5000/update-complaint', requestOptions);
 
         const data = await response.json();
+
+        document.getElementById(`${complaint[0]}`).children[0].setAttribute('hidden','true')
+        document.getElementById(`${complaint[0]}`).children[1].removeAttribute('hidden')
+
     }
 
     function dislpayComplaints(complaints){
         return(complaints.map( (complaint) => {
                                             
             return(<tr>
-                <td>{complaint[1]}</td>
+                <td style={{minWidth: '15rem'}}>{complaint[1]}</td>
                 <td>{complaint[2]}</td>
                 <td>
-                    {complaint[0] === 0? 
-                    <input type="button" id={`${complaint[0]}`} className="btn btn-primary" value='Resolve' onClick={() => resolveComplaint(complaint)}/>
+                    {complaint[3] === 0?
+                    <div id={`${complaint[0]}`}>
+                        <input type="button" className="btn btn-primary" value='Resolve' onClick={() => resolveComplaint(complaint)}/>
+                        <div className="on-resolve text-muted text-center" hidden>Resolved</div>
+                    </div>
                     :
                     <div className="text-muted text-center">Resolved</div>}
                 </td>
@@ -66,21 +73,19 @@ function Complaints(props){
                     <div id="complaints-container mt-1">
                         <div class="d-flex flex-column align-items-center">
 
-                            <div className="complaints-table row justify-content-center mb-2">
-                                <div className="complaints-table-wrapper col-12">
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Complaint</th>
-                                                <th>Filed by</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {dislpayComplaints(complaints)}
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div className="table-wrapper">
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Complaint</th>
+                                            <th>Filed by</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {dislpayComplaints(complaints)}
+                                    </tbody>
+                                </table>
                             </div>
 
                             <div class="w-25">

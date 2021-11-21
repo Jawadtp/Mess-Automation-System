@@ -1,4 +1,5 @@
 import getpass
+from flask.globals import request
 import psycopg2
 from datetime import datetime, timezone
 
@@ -87,7 +88,7 @@ def updateMenu(meal,mess_id):
 def get_complaints(mess_id):
     cur = conn.cursor()
     try:     
-        cur.execute('SELECT complaint_id, complaint_description,roll_no FROM complaints WHERE mess_id = %s',(mess_id,))
+        cur.execute('SELECT complaint_id, complaint_description,roll_no,status FROM complaints WHERE mess_id = %s',(mess_id,))
         res = cur.fetchall()
         cur.close()
         return res
@@ -125,5 +126,48 @@ def post_announcement(announcement,manager_id):
         cur.close()
         return 'Success'
     except:
+        cur.close()
+        return 'Failed'
+
+def insert_leave_req(roll_no,start_date,end_date,reason):
+    cur = conn.cursor()
+    try:
+        cur.execute('SELECT manager_id FROM managers where mess_id = (SELECT mess_id FROM students WHERE roll_no = %s)',(roll_no,))
+
+        manager_id = cur.fetchone()
+        # print(manager_id[0])
+
+        cur.execute('INSERT INTO leave_requests (start_date,end_date,reason,roll_no,manager_id) VALUES (%s,%s,%s,%s,%s)',(start_date,end_date,reason,roll_no,manager_id[0]))
+
+        conn.commit()
+        cur.close()
+        print('Success')
+        return 'Success'
+    except:
+        cur.close()
+        print('Failed')
+        return 'Failed'
+
+def get_leave_requests(manager_id):
+    cur = conn.cursor()
+    try:
+        cur.execute('SELECT roll_no,start_date,end_date,reason,status FROM leave_requests WHERE manager_id = %s',(manager_id,))
+        requests = cur.fetchall()
+        conn.commit()
+        cur.close()
+        return requests
+    except:
+        cur.close()
+        return 'Failed'
+
+def update_leave_requests(roll_no,start_date,status):
+    cur = conn.cursor()
+    try:
+        cur.execute('UPDATE leave_requests SET status = %s WHERE roll_no = %s and start_date = %s',(status,roll_no,start_date))
+        conn.commit()
+        cur.close()
+        return 'Success'
+    except Exception as e:
+        print(e)
         cur.close()
         return 'Failed'

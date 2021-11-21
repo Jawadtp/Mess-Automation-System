@@ -179,6 +179,32 @@ def post_announcement():
     print(message)
     return jsonify(message)
     
+@app.route('/submit-leave-request', methods = ['POST'])
+@cross_origin()
+def submit_leave_request():
+    roll_no = request.json['rollNo']
+    start_date = request.json['request']['startDate']
+    end_date = request.json['request']['endDate']
+    reason = request.json['request']['reason']
+    message = db.insert_leave_req(roll_no,start_date,end_date,reason)
+    return jsonify(message)
+
+@app.route('/get-leave-requests', methods = ['POST'])
+@cross_origin()
+def get_leave_requests():
+    manager_id = request.json['managerID']
+    requests = db.get_leave_requests(manager_id)
+    return jsonify(requests)
+
+@app.route('/update-leave-requests', methods = ['POST'])
+@cross_origin()
+def update_leave_requests():
+    roll_no= request.json['rollNo']
+    start_date= request.json['startDate']
+    status = request.json['status']
+    message = db.update_leave_requests(roll_no,start_date,status)
+    return jsonify(message)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 
