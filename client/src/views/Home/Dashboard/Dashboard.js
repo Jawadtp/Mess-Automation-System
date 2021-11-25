@@ -53,7 +53,7 @@ const Dashboard = () =>
         return(
             announcements.map((announcement) => {
                 return <tr>
-                    <td>
+                    <td className='text-start'>
                         <div className="annMessage">
                             <div className="annAuthor">
                                 <strong>{announcement[0]}</strong>

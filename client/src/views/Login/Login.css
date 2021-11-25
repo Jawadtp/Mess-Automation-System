@@ -32,7 +32,7 @@ body{
 }
 
 input[type=password],
-input[type=text]
+input[name=username]
 {
     border: 2px solid black;
 }
