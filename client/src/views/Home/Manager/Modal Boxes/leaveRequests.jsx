@@ -30,8 +30,6 @@ function LeaveRequests(props){
             }
         })
         
-        console.log(leaveRequests)
-        console.log (orderedLeaveRequests)
 
         setRequests(orderedLeaveRequests)
         

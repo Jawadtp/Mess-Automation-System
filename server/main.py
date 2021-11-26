@@ -214,6 +214,13 @@ def add_extras():
     status = db.add_extras(roll_no,extras,manager_id)
     return jsonify(status)
 
+@app.route('/get-student-info', methods = ['POST'])
+@cross_origin()
+def get_student_info():
+    manager_id = request.json['managerID']
+    info = db.get_student_info(manager_id)
+    return jsonify(info)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 

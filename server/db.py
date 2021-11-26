@@ -195,3 +195,16 @@ def add_extras(roll_no,extras,manager_id):
         print(e)
         cur.close()
         return 'Error'
+
+def get_student_info(manager_id):
+    cur = conn.cursor()
+    try:
+        cur.execute('SELECT mess_id from managers where manager_id=%s',(manager_id,))
+        mess_id = cur.fetchone()
+
+        cur.execute('SELECT u.roll_no,username,email FROM users u,students s WHERE u.roll_no = s.roll_no AND s.mess_id = %s',(mess_id,))
+    
+        info = cur.fetchall()
+        return info
+    except:
+        return 'Error'
