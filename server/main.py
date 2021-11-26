@@ -205,6 +205,15 @@ def update_leave_requests():
     message = db.update_leave_requests(roll_no,start_date,status)
     return jsonify(message)
 
+@app.route('/add-extras', methods = ['POST'])
+@cross_origin()
+def add_extras():
+    roll_no= request.json['rollNo']
+    extras = request.json['extras']
+    manager_id = request.json['managerID']
+    status = db.add_extras(roll_no,extras,manager_id)
+    return jsonify(status)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 

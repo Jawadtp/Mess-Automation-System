@@ -171,3 +171,27 @@ def update_leave_requests(roll_no,start_date,status):
         print(e)
         cur.close()
         return 'Failed'
+
+def add_extras(roll_no,extras,manager_id):
+    cur = conn.cursor()
+    try:
+        cur.execute('SELECT mess_id from managers where manager_id=%s',(manager_id,))
+
+        mess_id = cur.fetchone()
+
+        cur.execute('SELECT mess_id from students where roll_no=upper(%s)',(roll_no,))
+
+        student_mess_id = cur.fetchone()
+        print(mess_id,student_mess_id)
+        if (mess_id != student_mess_id):
+            return 'Invalid roll number'
+
+        cur.execute('UPDATE fees SET extras=extras+%s where roll_no=upper(%s)',(extras,roll_no))
+
+        conn.commit()
+        cur.close()
+        return 'Added Rs.'+extras+' for '+roll_no
+    except Exception as e:
+        print(e)
+        cur.close()
+        return 'Error'
