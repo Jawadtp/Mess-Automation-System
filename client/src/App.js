@@ -1,4 +1,3 @@
-import './App.css';
 import Home from './views/Home/Home';
 import Login from './views/Login/Login';
 import {useState, useEffect} from 'react'

@@ -11,6 +11,8 @@ const Dashboard = () =>
     const [announcements, setAnnouncements] = useState([])
     const [isMessRegModalShown, showMessRegModal] = useState(false)
     const [regReq, setRegReq] = useState('loading')
+    const [studentCount,setStudentCount] = useState(0)
+    const [feesLastCalculated,setFeesLastCalculated] = useState('')
 
     async function fetchAnnouncements()
     {
@@ -94,10 +96,43 @@ const Dashboard = () =>
         </div>
     }
 
+    async function getStudentCount(){
+        const requestOptions = 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messID: user['messid'] })
+        }
+
+        const response = await fetch('http://localhost:5000/get-student-count', requestOptions)
+
+        const data = await response.json()
+
+        setStudentCount(data[0])
+
+    }
+
+    async function getFeesLastCalculated(){
+        const requestOptions = 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messID: user['messid'] })
+        }
+
+        const response = await fetch('http://localhost:5000/get-fees-last-calculated', requestOptions)
+
+        const data = await response.json()
+        console.log(data)
+        setFeesLastCalculated(data[0][0].slice(0,-12))
+    }
+
     useEffect(() => 
     {
        fetchAnnouncements()
        getRegRequest()
+       getStudentCount()
+       getFeesLastCalculated()
     },[]);
 
     return (
@@ -117,21 +152,25 @@ const Dashboard = () =>
                             {user['email']}
                         </div>
                         {displayCurrentMess()}
-                        
                     </div>
                 </div>
 
                 <div className='col-10 col-md-4 col-xl-3'>
-                    <div className='current-fees'>
+                    {user['role'] ==='student'?<div className='current-fees'>
                         <div>Current Fees</div>
                         <h2><strong>Rs. 3,266</strong></h2>
                         <h6 className='text-muted'>Extras: {}</h6>
-                    </div>
+                    </div>:
+                    <div className='student-count text-center'>
+                        <div>Number of Students</div>
+                        <h2><strong>{studentCount}</strong></h2>
+                    </div>}
+                    
                 </div>
 
                 <div className='col-10 col-md-8 col-xl-3 text-center justify-content-center d-flex flex-column'>
-                    <div>
-                        <div id='pending-fee'>
+                    {user['role']==='student'?<div>
+                        <div className='pending-fee'>
                             <div>Pending Fees</div>
                             <h3><strong>Rs. 4,523</strong></h3>
                         </div>
@@ -139,10 +178,15 @@ const Dashboard = () =>
                             <div>Status:</div>
                             <div> Cleared</div>
                         </div>
+                    </div>:
+                    <div className='fees-last-calculated'>
+                        <div>Fees last calculated on</div>
+                        <h3><strong>{feesLastCalculated}</strong></h3>
                     </div>
+                    }
 
                     <div className='test'>
-                        <div id='next-meal'>
+                        <div className='next-meal'>
                             <div>Next Meal</div>
                             <h3><strong>Sample Meal Here</strong></h3>
                         </div>

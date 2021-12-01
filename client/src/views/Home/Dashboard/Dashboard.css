@@ -21,7 +21,9 @@
     padding: 1rem 1rem 0;
 }
 
-.user-info,.current-fees
+.user-info,
+.current-fees,
+.student-count
 {
     height: 100%;
     display: flex;
@@ -46,8 +48,9 @@
 }
 
 
-#pending-fee,
-#next-meal{
+.pending-fee,
+.next-meal,
+.fees-last-calculated{
     /* height: 50%; */
     background-color: white;
     margin:.25rem;

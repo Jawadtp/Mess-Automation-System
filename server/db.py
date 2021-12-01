@@ -208,3 +208,13 @@ def get_student_info(manager_id):
         return info
     except:
         return 'Error'
+
+def get_fees_last_calculated(mess_id):
+    cur = conn.cursor()
+    try:
+        cur.execute('SELECT feeslastcalculated FROM mess WHERE mess_id = %s',(mess_id,))
+    
+        info = cur.fetchall()
+        return info
+    except:
+        return 'Error'        

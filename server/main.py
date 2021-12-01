@@ -221,6 +221,20 @@ def get_student_info():
     info = db.get_student_info(manager_id)
     return jsonify(info)
 
+@app.route('/get-student-count', methods = ['POST'])
+@cross_origin()
+def get_student_count():
+    mess_id = request.json['messID']
+    info = db.getMessStudentCount(mess_id)
+    return jsonify(info)
+
+@app.route('/get-fees-last-calculated', methods = ['POST'])
+@cross_origin()
+def get_fees_last_calculated():
+    mess_id = request.json['messID']
+    info = db.get_fees_last_calculated(mess_id)
+    return jsonify(info)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 
