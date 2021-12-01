@@ -32,7 +32,7 @@ def getMessMealDetails(messId):
 
 def getMessDetails(messId):
     cur = conn.cursor() 
-    cur.execute("select m.messname, u.username from mess m, users u, managers mn where mn.manager_id=u.roll_no and mn.mess_id=m.mess_id and m.mess_id=%s",(messId,))        
+    cur.execute("select m.messname, u.username, u.email, m.feeslastcalculated from mess m, users u, managers mn where mn.manager_id=u.roll_no and mn.mess_id=m.mess_id and m.mess_id=%s",(messId,))        
     res = cur.fetchall()
     return res
 

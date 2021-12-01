@@ -39,12 +39,12 @@ const Sidebar = (props) =>
                     </a>
                 </li>
 
-                <li className={`nav-item ${props.view==='info'?'selected':''}`}>
+                {/* <li className={`nav-item ${props.view==='info'?'selected':''}`}>
                     <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('info')}>
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="link-text">Info</span>
                     </a>
-                </li>
+                </li> */}
                 
                 <li className={`nav-item ${props.view==='manage'?'selected':''}`}>
                     <a className="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('manage')}>

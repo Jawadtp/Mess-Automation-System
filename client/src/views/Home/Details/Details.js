@@ -98,6 +98,10 @@ const Details = () =>
     const user = useSelector((state)=> state.user.value)
 
     const [details, setDetails] = useState([])
+    const [managerName, setManagerName] = useState()
+    const [managerContact, setManagerContact] = useState()
+    const [numberOfStudents, setNumberOfStudents] = useState()
+    const [lastFeesCalculated, setLastFeesCalculated] = useState()
 
     async function fetchMessDetails()
     {
@@ -110,8 +114,15 @@ const Details = () =>
 
         const response = await fetch('http://localhost:5000/messdetails', requestOptions)
         let data = await response.json()
-         data = data['meals']
-        
+
+        setManagerName(data['details'][0][1])
+        setManagerContact(data['details'][0][2])
+        setLastFeesCalculated(data['details'][0][3].slice(0,-12))
+        setNumberOfStudents(data['count'])
+
+        console.log(data['count'],data['details'])
+
+        data = data['meals']
         let detailsOrganised = []
         for(var i=0; i<7; i++)
             detailsOrganised.push([])
@@ -156,8 +167,34 @@ const Details = () =>
                         <tbody>
                             {mealsTable(details)}
                         </tbody>
-                        {isAdmin()}
+                        {/* {isAdmin()} */}
                     </table>
+                </div>
+
+                <div className="row info-wrapper justify-content-center text-center align-items-center">
+
+                    <div className="info-card-wrapper col">
+                        <div className="info-card d-flex flex-column justify-content-center text-start">
+                                <p className='text-muted'>Manager Details</p>
+                                <p><strong>{managerName}</strong></p>
+                                <p><strong>{managerContact}</strong></p>
+                        </div>
+                    </div>
+
+                    <div className="info-card-wrapper col">
+                        <div className="info-card">
+                            <p className='text-muted'>Number of Students</p>
+                            <p><strong>{numberOfStudents}</strong></p>
+                        </div>
+                    </div>
+
+                    <div className="info-card-wrapper col">
+                        <div className="info-card">
+                            <p className='text-muted'>Fees last calculated at: </p>
+                            <p><strong>{lastFeesCalculated}</strong></p>
+                        </div>
+                    </div>
+
                 </div>
                 
             </div>}
@@ -165,7 +202,7 @@ const Details = () =>
             {/* <div className='button-row row justify-content-end'>
                 
             </div> */}
-            <footer style={{marginTop:'10rem'}}></footer>
+            <footer style={{marginTop:'7rem'}}></footer>
         </div>
     )
 }

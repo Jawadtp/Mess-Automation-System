@@ -61,6 +61,22 @@ tr:hover{
     margin-bottom: 5rem;
 }
 
+.info-wrapper{
+    margin-top: 1.5rem;
+}
+
+.info-card-wrapper{
+    padding: .5rem;
+}
+
+.info-card{
+    background-color: white;
+    border-radius: 5px;
+    padding: 3rem;
+    min-height: 7rem;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+}
+
 @media (max-width: 740px){
     .table-wrapper{
         overflow-x: scroll;
@@ -78,6 +94,9 @@ tr:hover{
     .button-row{
         margin-top:1.75rem;
         width:100%;
+    }
+    .info-card{
+        padding: 1.5rem;
     }
     
 }
