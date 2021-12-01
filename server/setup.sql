@@ -14,7 +14,7 @@ INSERT INTO users (roll_no, username, password, email, role) VALUES ('B190534CS'
 
 INSERT INTO users (roll_no, username, password, email, role) VALUES ('B190468CS', 'Celestine Joy', 'admin', 'celestine_b190468cs@nitc.ac.in', 'student');
 
-INSERT INTO users (roll_no, username, password, email, role) VALUES ('B190439CS', 'KA Midhun Kumar', 'admin', 'midhunkumar_b190439cs@nitc.ac.in', 'student');
+INSERT INTO users (roll_no, username, password, email, role) VALUES ('B190439CS', 'K A Midhunkumar', 'admin', 'midhunkumar_b190439cs@nitc.ac.in', 'student');
 
 INSERT INTO users (roll_no, username, password, email, role) VALUES ('W190100', 'Tom Cruise', 'admin', 'tomcruise@nitc.ac.in', 'manager');
 
@@ -47,6 +47,10 @@ INSERT INTO students (mess_ID, roll_no) VALUES (2, 'B190441CS'); /* Jawad is reg
 INSERT INTO students (mess_ID, roll_no) VALUES (1, 'B190837CS'); /* Shehzad is registered to A mess */
 
 INSERT INTO students (mess_ID, roll_no) VALUES (1, 'B190534CS'); /* Shan is registered to A mess */
+
+INSERT INTO students (mess_ID, roll_no) VALUES (2, 'B190468CS'); /* Celestine is registered to B mess */
+
+INSERT INTO students (mess_ID, roll_no) VALUES (2, 'B190439CS'); /* Midhun is registered to B mess */
 
 /* Create announcements table */
 
@@ -110,6 +114,27 @@ INSERT INTO mess_meals VALUES(2, 13, 4, '7:30');
 INSERT INTO mess_meals VALUES (2, 14, 4, '13:00');
 INSERT INTO mess_meals VALUES(2, 15, 4, '20:30');
 
+INSERT INTO mess_meals VALUES(1, 1, 0, '7:30');     /* Day 0 - Monday */
+INSERT INTO mess_meals VALUES (1, 2, 0, '13:00');
+INSERT INTO mess_meals VALUES(1, 3, 0, '20:30');
+
+INSERT INTO mess_meals VALUES(1, 4, 1, '7:30');  
+INSERT INTO mess_meals VALUES (1, 5, 1, '13:00');
+INSERT INTO mess_meals VALUES(1, 6, 1, '20:30');
+
+INSERT INTO mess_meals VALUES(1, 7, 2, '7:30');  
+INSERT INTO mess_meals VALUES (1, 8, 2, '13:00');
+INSERT INTO mess_meals VALUES(1, 9, 2, '20:30');
+
+
+INSERT INTO mess_meals VALUES(1, 10, 3, '7:30');  
+INSERT INTO mess_meals VALUES (1, 11, 3, '13:00');
+INSERT INTO mess_meals VALUES(1, 12, 3, '20:30');
+
+INSERT INTO mess_meals VALUES(1, 13, 4, '7:30');  
+INSERT INTO mess_meals VALUES (1, 14, 4, '13:00');
+INSERT INTO mess_meals VALUES(1, 15, 4, '20:30');
+
 -- Create table complaints
 CREATE TABLE complaints(complaint_ID SERIAL PRIMARY KEY, complaint_description TEXT,mess_ID INTEGER references mess(mess_ID),roll_no VARCHAR(10) references students(roll_no),posted_at TIMESTAMP DEFAULT NOW(),status INTEGER DEFAULT 0); /* 0 - Pending, 1 - Resolved */
 
@@ -119,6 +144,9 @@ INSERT INTO complaints(complaint_ID, complaint_description,mess_ID,roll_no,statu
 
 -- Create table fees
 CREATE TABLE fees(roll_no VARCHAR(10) PRIMARY KEY references students(roll_no),pending_fees INTEGER,extras INTEGER);
+
+-- Create fee table entries
+insert into fees (select roll_no, 0, 0 from students);
 
 -- Create table leave_requests
 CREATE TABLE leave_requests(roll_no VARCHAR(10) references students(roll_no), start_date DATE DEFAULT CURRENT_DATE, end_date DATE,reason TEXT, manager_ID VARCHAR(10) references managers(manager_ID), status INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(roll_no,start_date));
