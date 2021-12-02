@@ -75,6 +75,7 @@ tr:hover{
     padding: 3rem;
     min-height: 7rem;
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.123);
+    white-space: nowrap;
 }
 
 @media (max-width: 740px){

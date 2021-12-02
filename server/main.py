@@ -246,6 +246,12 @@ def get_fees_details():
     print(info)
     return jsonify(info)
 
+@app.route('/get-number-of-leaves', methods = ['POST'])
+@cross_origin()
+def get_leaves():
+    roll_no = request.json['rollNo']
+    info = db.get_number_of_leaves(roll_no)
+    return jsonify(info)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)

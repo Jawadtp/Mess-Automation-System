@@ -34,8 +34,8 @@ const Sidebar = (props) =>
 
                 <li className={`nav-item ${props.view==='details'?'selected':''}`}>
                     <a class="navBtn nav-link" style={{'color':'white'}} onClick={() => onNavLinkClick('details')}>
-                        <i class="bi bi-person-fill"></i>
-                        <span class="link-text">Details</span>
+                        <i class="bi bi-info-circle-fill"></i>
+                        <span class="link-text">{user['role']==='student'?'Details':'Menu'}</span>
                     </a>
                 </li>
 

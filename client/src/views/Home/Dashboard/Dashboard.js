@@ -44,9 +44,9 @@ const Dashboard = () =>
 
         const response = await fetch('http://localhost:5000/regreq', requestOptions)
 
-        console.log('reg request: ', response)
+        // console.log('reg request: ', response)
         const data = await response.json()
-        console.log('ref req data: ',data)
+        // console.log('ref req data: ',data)
         setRegReq(data)
     }
 

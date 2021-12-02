@@ -6,6 +6,16 @@ import './Details.css'
 const Details = () => 
 {
 
+    const user = useSelector((state)=> state.user.value)
+
+    const [details, setDetails] = useState([])
+    const [managerName, setManagerName] = useState()
+    const [managerContact, setManagerContact] = useState()
+    const [numberOfStudents, setNumberOfStudents] = useState()
+    const [lastFeesCalculated, setLastFeesCalculated] = useState()
+    const [numberOfLeaves,setNumberOfLeaves] = useState()
+    const [ratePerDay,setRatePerDay] = useState()
+
     const dayName = 
     {
         0: 'Monday',
@@ -51,7 +61,7 @@ const Details = () =>
             document.getElementsByTagName('tbody')[0].contentEditable = 'false';
             target.remove('bi-check-lg');
             target.add('bi-pen');
-            updateMeals()
+            // updateMeals()
         }
     }
 
@@ -91,17 +101,8 @@ const Details = () =>
         }
 
         const response = await fetch('http://localhost:5000/update-meals', requestOptions)
-        // fetch('http://localhost:5000/update-meals', requestOptions);
-        // const data = await response.json()
+
     }
-
-    const user = useSelector((state)=> state.user.value)
-
-    const [details, setDetails] = useState([])
-    const [managerName, setManagerName] = useState()
-    const [managerContact, setManagerContact] = useState()
-    const [numberOfStudents, setNumberOfStudents] = useState()
-    const [lastFeesCalculated, setLastFeesCalculated] = useState()
 
     async function fetchMessDetails()
     {
@@ -119,8 +120,9 @@ const Details = () =>
         setManagerContact(data['details'][0][2])
         setLastFeesCalculated(data['details'][0][3].slice(0,-12))
         setNumberOfStudents(data['count'])
+        setRatePerDay(data['details'][0][4])
 
-        console.log(data['count'],data['details'])
+        // console.log(data['count'],data['details'])
 
         data = data['meals']
         let detailsOrganised = []
@@ -138,10 +140,28 @@ const Details = () =>
         // console.log('Organised data: ')
         // console.log(detailsOrganised)
     }
+    
+    async function getNumberOfLeaves(){
+        if(user['role'] === 'student'){
+
+            const requestOptions = 
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rollNo: user['rollno'] })
+            }
+    
+            const response = await fetch('http://localhost:5000/get-number-of-leaves', requestOptions)
+            let data = await response.json()
+    
+            setNumberOfLeaves(data[0])
+        }
+    }
 
     useEffect(() => 
     {
        fetchMessDetails()
+       getNumberOfLeaves()
     },[]);
         
 
@@ -167,11 +187,11 @@ const Details = () =>
                         <tbody>
                             {mealsTable(details)}
                         </tbody>
-                        {/* {isAdmin()} */}
+                        {isAdmin()}
                     </table>
                 </div>
 
-                <div className="row info-wrapper justify-content-center text-center align-items-center">
+                {user['role']==='student'?<div className="row info-wrapper justify-content-center text-center align-items-center">
 
                     <div className="info-card-wrapper col">
                         <div className="info-card d-flex flex-column justify-content-center text-start">
@@ -181,10 +201,12 @@ const Details = () =>
                         </div>
                     </div>
 
-                    <div className="info-card-wrapper col">
+                    <div className="info-card-wrapper col ">
                         <div className="info-card">
-                            <p className='text-muted'>Number of Students</p>
-                            <p><strong>{numberOfStudents}</strong></p>
+                            <p className='text-muted'>Rate Per Day</p>
+                            <p><strong>{ratePerDay}</strong></p>
+                            <p className='text-muted'>Leaves taken</p>
+                            <p><strong>{numberOfLeaves}</strong></p>
                         </div>
                     </div>
 
@@ -195,7 +217,7 @@ const Details = () =>
                         </div>
                     </div>
 
-                </div>
+                </div>:''}
                 
             </div>}
             

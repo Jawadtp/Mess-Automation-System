@@ -12,7 +12,7 @@ const Home = () =>
 {
     const [view, setView] = useState('dashboard')
     const user = useSelector((state)=> state.user.value)
-    console.log('User: ',user)
+    // console.log('User: ',user)
     function renderView(view)
     {
         switch(view)
