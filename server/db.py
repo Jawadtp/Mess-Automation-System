@@ -217,4 +217,24 @@ def get_fees_last_calculated(mess_id):
         info = cur.fetchall()
         return info
     except:
-        return 'Error'        
+        return 'Error'   
+
+def get_mess_rate(mess_id):
+    cur = conn.cursor()
+    try:
+        cur.execute('SELECT rate FROM mess where mess_id = %s',(mess_id,))
+        info = cur.fetchone()
+        return info
+    except:
+        return 'Error' 
+
+def get_fees_details(roll_no):
+    cur = conn.cursor()
+    try:
+        cur.execute('SELECT f.pending_fees, f.extras, s.noofleaves FROM fees f, students s WHERE s.roll_no = %s and s.roll_no = f.roll_no',(roll_no,))
+        
+        info = cur.fetchone()
+
+        return info
+    except:
+        return 'Error'    

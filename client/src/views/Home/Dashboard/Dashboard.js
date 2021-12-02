@@ -13,7 +13,8 @@ const Dashboard = () =>
     const [regReq, setRegReq] = useState('loading')
     const [studentCount,setStudentCount] = useState(0)
     const [feesLastCalculated,setFeesLastCalculated] = useState('')
-
+    const [feeDetails, setFeeDetails] = useState({})
+    
     async function fetchAnnouncements()
     {
         const requestOptions = 
@@ -51,7 +52,7 @@ const Dashboard = () =>
 
     function displayAnnouncement(announcements)
     {
-        console.log(announcements)
+        // console.log(announcements)
         return(
             announcements.map((announcement) => {
                 return <tr>
@@ -123,8 +124,51 @@ const Dashboard = () =>
         const response = await fetch('http://localhost:5000/get-fees-last-calculated', requestOptions)
 
         const data = await response.json()
-        console.log(data)
+        
         setFeesLastCalculated(data[0][0].slice(0,-12))
+    }
+
+    async function getFeesDetails(){
+        if (user['role'] === 'student'){
+
+            const requestOptions = 
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    rollNo: user['rollno'],
+                    messID: user['messid']
+                })
+            }
+    
+            let response = await fetch('http://localhost:5000/get-fees-details', requestOptions)
+    
+            const data = await response.json()
+    
+            response = await fetch('http://localhost:5000/get-fees-last-calculated', requestOptions)
+
+            let lastFeesDay = await response.json()
+
+            let today = new Date()
+
+            lastFeesDay = new Date(lastFeesDay[0])
+
+            let numberOfDays = Math.floor(Math.abs(today - lastFeesDay)/(1000 * 3600 * 24))
+
+            let leaves = Number(data[0][2])
+            let rate = Number(data[1][0])
+            let extras = Number(data[0][1])
+
+
+            let currentFees = (numberOfDays - leaves )*rate + extras;
+            
+            let feeDetails = {
+                pendingFees: data[0][0],
+                extras: data[0][1],
+                currentFees: currentFees
+            }
+            setFeeDetails(feeDetails)
+        }
     }
 
     useEffect(() => 
@@ -133,6 +177,7 @@ const Dashboard = () =>
        getRegRequest()
        getStudentCount()
        getFeesLastCalculated()
+       getFeesDetails()
     },[]);
 
     return (
@@ -158,8 +203,8 @@ const Dashboard = () =>
                 <div className='col-10 col-md-4 col-xl-3'>
                     {user['role'] ==='student'?<div className='current-fees'>
                         <div>Current Fees</div>
-                        <h2><strong>Rs. 3,266</strong></h2>
-                        <h6 className='text-muted'>Extras: {}</h6>
+                        <h2><strong>{feeDetails.currentFees}</strong></h2>
+                        <h6 className='text-muted'>Extras: {feeDetails.extras}</h6>
                     </div>:
                     <div className='student-count text-center'>
                         <div>Number of Students</div>
@@ -172,7 +217,7 @@ const Dashboard = () =>
                     {user['role']==='student'?<div>
                         <div className='pending-fee'>
                             <div>Pending Fees</div>
-                            <h3><strong>Rs. 4,523</strong></h3>
+                            <h3><strong>{feeDetails.pendingFees}</strong></h3>
                         </div>
                         <div className='fees-status'>
                             <div>Status:</div>
@@ -188,7 +233,7 @@ const Dashboard = () =>
                     <div className='test'>
                         <div className='next-meal'>
                             <div>Next Meal</div>
-                            <h3><strong>Sample Meal Here</strong></h3>
+                            <h3><strong>Fried Rice</strong></h3>
                         </div>
                     </div>
                 </div>

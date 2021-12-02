@@ -235,6 +235,18 @@ def get_fees_last_calculated():
     info = db.get_fees_last_calculated(mess_id)
     return jsonify(info)
 
+@app.route('/get-fees-details', methods = ['POST'])
+@cross_origin()
+def get_fees_details():
+    roll_no = request.json['rollNo']
+    mess_id= request.json['messID']
+    info = []
+    info.append(db.get_fees_details(roll_no))
+    info.append(db.get_mess_rate(mess_id))
+    print(info)
+    return jsonify(info)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 
