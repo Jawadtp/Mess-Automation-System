@@ -10,7 +10,8 @@ app.listen(port, () => {
     console.log(`Backend node server listening on port ${port}`)
   })
 
-app.get('/messes', (req, res) => {
-    let messes = db.getMesses()
+app.get('/messes', async (req, res) => {
+    let messes = await db.getMesses()
+    // send jsonified response
     res.send(jsonify(messes))
   })

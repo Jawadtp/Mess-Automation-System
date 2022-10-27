@@ -34,6 +34,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 @cross_origin()
 def getMesses():
     messes = db.getMesses()
+    print(messes)
+    print(jsonify(messes))
     return jsonify(messes)
 
 @app.route("/addregrequest", methods=['POST'])
