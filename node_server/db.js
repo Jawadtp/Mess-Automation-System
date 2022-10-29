@@ -83,6 +83,20 @@ async function getUserMessFromEmail(email, role){
   return userMess[0]
 }
 
+async function getAnnouncements(messId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  let announcementsResult = await client.query("SELECT u.username, u.role, a.announcement, a.posted_at FROM users u, announcements a WHERE a.roll_no IN (SELECT manager_ID FROM managers WHERE mess_ID=$1) AND a.roll_no=u.roll_no ORDER BY posted_at DESC", [messId])
+
+  let announcements = format_result(announcementsResult)
+  await client.end()
+  return announcements
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -90,6 +104,6 @@ db.getMesses = getMesses
 db.doesUserExist = doesUserExist
 db.getUserInfoFromEmail = getUserInfoFromEmail
 db.getUserMessFromEmail = getUserMessFromEmail
-
+db.getAnnouncements = getAnnouncements
 
 module.exports = db

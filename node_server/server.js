@@ -4,6 +4,7 @@ const db = require('./db')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
+const { json } = require('body-parser')
 
 const app = express()
 const port = 5000
@@ -75,3 +76,13 @@ app.get('/messes', async (req, res) => {
     // send jsonified response
     res.send(jsonify(messes))
   })
+
+app.post('/announcements', parser, async (req, res) => {
+  let messId = req.body.messid
+  try{
+    let announcements = await db.getAnnouncements(messId)
+    res.send(jsonify(announcements))
+  }catch(err){
+    res.send(jsonify({"error": err}))
+  }
+})
