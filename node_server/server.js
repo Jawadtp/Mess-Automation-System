@@ -107,5 +107,16 @@ app.post('/get-complaints', parser, async (req, res) => {
 
   let complaints = await db.getComplaints(messId)
   res.send(jsonify(complaints))
-  
+
+})
+
+app.post('/post-complaint', parser, async (req, res) => {
+
+  let rollNo = req.body.rollNo
+  let messID = req.body.messID
+  let complaint = req.body.complaint
+
+  let message = db.addComplaint(rollNo, messID, complaint)
+  res.send(jsonify(message))
+
 })

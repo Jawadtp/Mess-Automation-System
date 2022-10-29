@@ -150,8 +150,31 @@ async function getComplaints(messId){
   let complaintsResult = await client.query("SELECT complaint_id, complaint_description,roll_no,status FROM complaints WHERE mess_id = $1", [messId])
 
   let complaints = format_result(complaintsResult)
+  await client.end()
   return complaints
   
+}
+
+async function addComplaint(rollNo, messId, complaint){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+
+  try{
+
+    await client.query("INSERT INTO complaints(complaint_description,mess_ID,roll_no) values($1,$2,$3)", [complaint, messId, rollNo])
+  
+    await client.end()
+    return 'Success'
+    
+  }catch(err){
+    console.log("Failed posting complaint: ", err)
+    await client.end()
+    return 'Failed'
+  }
 }
 
 let db = {};
@@ -166,4 +189,6 @@ db.getMessMealDetails = getMessMealDetails
 db.getMessDetails =getMessDetails
 db.getMessStudentCount =getMessStudentCount
 db.getComplaints = getComplaints
+db.addComplaint = addComplaint
+
 module.exports = db
