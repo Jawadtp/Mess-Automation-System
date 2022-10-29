@@ -86,3 +86,18 @@ app.post('/announcements', parser, async (req, res) => {
     res.send(jsonify({"error": err}))
   }
 })
+
+app.all('/messdetails', parser, async (req, res) => {
+  let messId = req.body.messid
+
+  try{
+    let meals = await db.getMessMealDetails(messId)
+    let messDetails = await db.getMessDetails(messId)
+    let studentCount = await db.getMessStudentCount(messId)
+
+    res.send(jsonify({'meals': meals, 'count': studentCount,'details': messDetails}))
+  }catch(err) {
+    console.log(err)
+    res.send(jsonify({'message': 'error'}))
+  }
+})

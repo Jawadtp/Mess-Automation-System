@@ -97,6 +97,48 @@ async function getAnnouncements(messId){
   return announcements
 }
 
+async function getMessMealDetails(messId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  let mealDetailsResult = await client.query("select ms.mealname, m.dayofweek, m.time from meals ms, mess_meals m where m.mealid = ms.id AND m.mess_ID=$1", [messId])
+
+  let mealDetails = format_result(mealDetailsResult)
+  await client.end()
+  return mealDetails
+}
+
+async function getMessDetails(messId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  let messDetailsResult = await client.query("select m.messname, u.username, u.email, m.feeslastcalculated, m.rate from mess m, users u, managers mn where mn.manager_id=u.roll_no and mn.mess_id=m.mess_id and m.mess_id=$1", [messId])
+
+  let messDetails = format_result(messDetailsResult)
+  await client.end()
+  return messDetails
+}
+
+async function getMessStudentCount(messId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  let studentCountResult = await client.query("select count(roll_no) from students where mess_id=$1", [messId])
+
+  let studentCount = format_result(studentCountResult)
+  await client.end()
+  return studentCount[0]
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -105,5 +147,8 @@ db.doesUserExist = doesUserExist
 db.getUserInfoFromEmail = getUserInfoFromEmail
 db.getUserMessFromEmail = getUserMessFromEmail
 db.getAnnouncements = getAnnouncements
+db.getMessMealDetails = getMessMealDetails
+db.getMessDetails =getMessDetails
+db.getMessStudentCount =getMessStudentCount
 
 module.exports = db
