@@ -21,19 +21,37 @@ async function getMesses(){
     })
 
     await client.connect()
-    const messes = await client.query('select mess_id, messname from mess where mess_id in (select mess_id from managers)')
+    const messes_result = await client.query('select mess_id, messname from mess where mess_id in (select mess_id from managers)')
 
     // Here result obtained is of the form {.."rows":[{"..":".."},{"..":".."}]..} 
     // so, convert db result to former python-backend format [..(,)..]
-    let result = format_result(messes)
+    let messes = format_result(messes_result)
 
     await client.end()
-    return result
+    return messes
+}
+
+async function doesUserExist(email, password){
+    const client = new Client({
+      user: 'SinadShan',
+      database: 'mess'
+  })
+
+  await client.connect()
+  let user_result = await client.query("SELECT EXISTS(SELECT 1 FROM users WHERE email=$1 AND password=$2)", [email, password])
+  
+  
+  let user = format_result(user_result)
+  console.log("User details fetched from db: ", user)
+
+  await client.end()
+  return user
 }
 
 let db = {};
 
 // Add all functions to property of object db
 db.getMesses = getMesses
+db.doesUserExist = doesUserExist
 
 module.exports = db

@@ -2,9 +2,14 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 
 const app = express()
-const port = 3000
+const port = 5000
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+}))
 
 // parser is a json parser
 const parser = bodyParser.json()
@@ -17,7 +22,6 @@ app.listen(port, () => {
   })
 
 app.all('/login', parser, (req, res) => {
-  console.log(req.body)
   let email = req.body.email
   let password = req.body.password
 
@@ -25,9 +29,9 @@ app.all('/login', parser, (req, res) => {
     let userExists = db.doesUserExist(email, password)
 
     if(userExists){
-      key = process.env.SECRET_KEY
+      let key = process.env.SECRET_KEY
       let access_token = jwt.sign(email,key)
-      res.send(jsonify(access_token))
+      res.send(jsonify({ access_token: access_token} ))
     }
   }catch(err){
     console.log(err)
