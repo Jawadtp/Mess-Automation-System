@@ -101,3 +101,11 @@ app.all('/messdetails', parser, async (req, res) => {
     res.send(jsonify({'message': 'error'}))
   }
 })
+
+app.post('/get-complaints', parser, async (req, res) => {
+  let messId = req.body.messID
+
+  let complaints = await db.getComplaints(messId)
+  res.send(jsonify(complaints))
+  
+})

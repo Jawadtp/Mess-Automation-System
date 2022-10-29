@@ -139,6 +139,21 @@ async function getMessStudentCount(messId){
   return studentCount[0]
 }
 
+async function getComplaints(messId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  
+  let complaintsResult = await client.query("SELECT complaint_id, complaint_description,roll_no,status FROM complaints WHERE mess_id = $1", [messId])
+
+  let complaints = format_result(complaintsResult)
+  return complaints
+  
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -150,5 +165,5 @@ db.getAnnouncements = getAnnouncements
 db.getMessMealDetails = getMessMealDetails
 db.getMessDetails =getMessDetails
 db.getMessStudentCount =getMessStudentCount
-
+db.getComplaints = getComplaints
 module.exports = db
