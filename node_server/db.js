@@ -16,8 +16,8 @@ function format_result(db_result){
 async function getMesses(){
 
     const client = new Client({
-        user: 'SinadShan',
-        database: 'mess'
+      user: 'SinadShan',
+      database: 'mess'
     })
 
     await client.connect()
@@ -32,9 +32,9 @@ async function getMesses(){
 }
 
 async function doesUserExist(email, password){
-    const client = new Client({
-      user: 'SinadShan',
-      database: 'mess'
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
   })
 
   await client.connect()
@@ -42,10 +42,45 @@ async function doesUserExist(email, password){
   
   
   let user = format_result(user_result)
-  console.log("User details fetched from db: ", user)
 
   await client.end()
   return user
+}
+
+async function getUserInfoFromEmail(email){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  let infoResult = await client.query("SELECT roll_no, username, email, role FROM users WHERE email=$1 LIMIT 1",[email])
+
+  let info = format_result(infoResult)
+
+  await client.end()
+  return info[0]
+}
+
+async function getUserMessFromEmail(email, role){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  let userMessResult
+  if(role === 'student')
+    userMessResult = await client.query("SELECT messname, mess_ID FROM mess WHERE mess_ID = (SELECT mess_ID FROM students WHERE roll_no = (SELECT roll_no FROM users WHERE email=$1))", [email])
+  else
+    userMessResult = await client.query("SELECT messname, mess_ID FROM mess WHERE mess_ID = (SELECT mess_ID FROM managers WHERE manager_ID = (SELECT roll_no FROM users WHERE email=$1))", [email])
+
+  let userMess = format_result(userMessResult)
+
+  await client.end()
+
+  // corresponding to fetchone() in psycopg2, returns single list
+  return userMess[0]
 }
 
 let db = {};
@@ -53,5 +88,8 @@ let db = {};
 // Add all functions to property of object db
 db.getMesses = getMesses
 db.doesUserExist = doesUserExist
+db.getUserInfoFromEmail = getUserInfoFromEmail
+db.getUserMessFromEmail = getUserMessFromEmail
+
 
 module.exports = db
