@@ -177,6 +177,28 @@ async function addComplaint(rollNo, messId, complaint){
   }
 }
 
+async function insertLeaveReq(rollNo, startDate, endDate, reason){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  try{
+    let managerIdResult = await client.query("SELECT manager_id FROM managers where mess_id = (SELECT mess_id FROM students WHERE roll_no = $1)", [rollNo])
+    let managerId = format_result(managerIdResult)[0][0]
+  
+    await client.query("INSERT INTO leave_requests (start_date,end_date,reason,roll_no,manager_id) VALUES ($1,$2,$3,$4,$5)", [startDate, endDate, reason, rollNo, managerId])
+  
+    await client.end()
+    return 'Success'
+  }catch(err){
+    console.log("Failed adding leave request: ", err)
+    await client.end()
+    return 'Failed'
+  }
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -190,5 +212,6 @@ db.getMessDetails =getMessDetails
 db.getMessStudentCount =getMessStudentCount
 db.getComplaints = getComplaints
 db.addComplaint = addComplaint
+db.insertLeaveReq = insertLeaveReq
 
 module.exports = db

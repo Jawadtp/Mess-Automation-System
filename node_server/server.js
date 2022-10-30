@@ -120,3 +120,15 @@ app.post('/post-complaint', parser, async (req, res) => {
   res.send(jsonify(message))
 
 })
+
+app.post('/submit-leave-request', parser, async (req, res) => {
+
+  let rollNo = req.body.rollNo
+  let startDate = req.body.request.startDate
+  let endDate = req.body.request.endDate
+  let reason = req.body.request.reason
+
+  let message = await db.insertLeaveReq(rollNo, startDate, endDate, reason)
+  res.send(jsonify(message))
+
+})
