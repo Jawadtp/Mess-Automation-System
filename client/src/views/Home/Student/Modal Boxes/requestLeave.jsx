@@ -43,11 +43,11 @@ function RequestLeave(props){
                         <div className="calenders row">
                             <div className="col-auto ">
                                 <label>Starting Date:</label><br />
-                                <input type="date" className='start-date'/>
+                                <input type="date" className='start-date' required/>
                             </div>
                             <div className="col-auto">
                                 <label>End Date:</label><br />
-                                <input type="date" className='end-date'/>
+                                <input type="date" className='end-date' required/>
                             </div>
                         </div>
                         <div className='reason mb-3'>
@@ -62,12 +62,17 @@ function RequestLeave(props){
                                     let startDate = document.querySelector('.start-date').value;
                                     let endDate = document.querySelector('.end-date').value;
                                     let reason = document.getElementsByClassName('leave-req-text-area')[0].value
-                                    let request = {
-                                        startDate: startDate,
-                                        endDate: endDate,
-                                        reason: reason
-                                    }
-                                    submitLeaveRequest(request)}} />
+
+                                    if (startDate == '' || endDate == '' || reason == ''){
+                                        alert('Provide all details!')
+                                    }else{
+                                        let request = {
+                                            startDate: startDate,
+                                            endDate: endDate,
+                                            reason: reason
+                                        }
+                                        submitLeaveRequest(request)
+                                    }}} />
                             </div>
                 
                         </div>
