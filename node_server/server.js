@@ -132,3 +132,14 @@ app.post('/submit-leave-request', parser, async (req, res) => {
   res.send(jsonify(message))
 
 })
+
+app.post('/update-leave-requests', parser, async (req, res) => {
+  
+  let rollNo = req.body.rollNo
+  let startDate = req.body.startDate
+  let status = req.body.status
+  let message = db.updateLeaveRequests(rollNo, startDate, status)
+
+  res.send(message)
+
+})

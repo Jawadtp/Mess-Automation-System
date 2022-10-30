@@ -199,6 +199,24 @@ async function insertLeaveReq(rollNo, startDate, endDate, reason){
   }
 }
 
+async function updateLeaveRequests(rollNo, startDate, status){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  try{
+    await client.query("UPDATE leave_requests SET status = $1 WHERE roll_no = $2 and start_date = $3", [rollNo, startDate, status])
+    await client.end()
+    return 'Success'
+  }catch(err) {
+    console.log("Failed updating leave request: ",err)
+    await client.end()
+    return 'Failed'
+  }
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -213,5 +231,6 @@ db.getMessStudentCount =getMessStudentCount
 db.getComplaints = getComplaints
 db.addComplaint = addComplaint
 db.insertLeaveReq = insertLeaveReq
+db.updateLeaveRequests = updateLeaveRequests
 
 module.exports = db
