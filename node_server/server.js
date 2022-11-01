@@ -121,6 +121,13 @@ app.post('/post-complaint', parser, async (req, res) => {
 
 })
 
+app.post('/get-leave-requests', parser, async (req, res) => {
+  let managerId = req.body.managerID
+  let requests = await db.getLeaveRequests(managerId)
+
+  res.send(jsonify(requests))
+})
+
 app.post('/submit-leave-request', parser, async (req, res) => {
 
   let rollNo = req.body.rollNo
