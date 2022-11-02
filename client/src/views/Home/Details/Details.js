@@ -118,7 +118,7 @@ const Details = () =>
 
         setManagerName(data['details'][0][1])
         setManagerContact(data['details'][0][2])
-        setLastFeesCalculated(data['details'][0][3].slice(0,-12))
+        setLastFeesCalculated(data['details'][0][3].slice(0,-14))
         setNumberOfStudents(data['count'])
         setRatePerDay(data['details'][0][4])
 

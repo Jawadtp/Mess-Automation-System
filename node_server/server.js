@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const cors = require('cors')
 const { json } = require('body-parser')
 const { request } = require('express')
+const { parse } = require('pg-protocol')
 
 const app = express()
 const port = 5000
@@ -163,6 +164,15 @@ app.post('/get-student-count', parser, async (req, res) => {
 
   res.send(jsonify(count))
 
+})
+
+app.post('/get-fees-last-calculated', parser, async (req, res) => {
+
+  let messId = req.body.messID
+  let date = await db.getFeesLastCalculated(messId)
+
+  res.send(jsonify(date))
+  
 })
 
 // function to format date from ISO standard to yyyy-mm-dd

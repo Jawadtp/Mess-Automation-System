@@ -125,7 +125,7 @@ const Dashboard = () =>
 
         const data = await response.json()
         
-        setFeesLastCalculated(data[0][0].slice(0,-12))
+        setFeesLastCalculated(data[0][0].slice(0,-14))
     }
 
     async function getFeesDetails(){

@@ -239,6 +239,21 @@ async function getLeaveRequests(managerId){
 
 }
 
+async function getFeesLastCalculated(messId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  
+  let dateResult = await client.query("SELECT feeslastcalculated FROM mess WHERE mess_id = $1", [messId])
+  let date = formatResult(dateResult)
+
+  await client.end()
+  return date
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -255,5 +270,6 @@ db.addComplaint = addComplaint
 db.insertLeaveReq = insertLeaveReq
 db.updateLeaveRequests = updateLeaveRequests
 db.getLeaveRequests = getLeaveRequests
+db.getFeesLastCalculated = getFeesLastCalculated
 
 module.exports = db
