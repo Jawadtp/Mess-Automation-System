@@ -172,13 +172,22 @@ app.post('/get-fees-last-calculated', parser, async (req, res) => {
   let date = await db.getFeesLastCalculated(messId)
 
   res.send(jsonify(date))
+
+})
+
+app.post('/get-number-of-leaves', parser, async (req, res) => {
   
+  let rollNo = req.body.rollNo
+  let leaves = await db.getNumberOfLeaves(rollNo)
+
+  res.send(jsonify(leaves))
+
 })
 
 // function to format date from ISO standard to yyyy-mm-dd
 function formatDate(request){
   let startDate = new Date(request[1])
-  request[1] = startDate.getFullYear() + '-' + startDate.getDate()
+  request[1] = startDate.getFullYear() + '-' + (startDate.getMonth()+1) + '-' + startDate.getDate()
 
   let endDate = new Date(request[2])
   request[2] = endDate.getFullYear() + '-' + (endDate.getMonth()+1) + '-' + endDate.getDate()
