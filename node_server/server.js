@@ -156,6 +156,15 @@ app.post('/update-leave-requests', parser, async (req, res) => {
 
 })
 
+app.post('/get-student-count', parser, async (req, res) => {
+
+  let messId = req.body.messID
+  let count = await db.getMessStudentCount(messId)
+
+  res.send(jsonify(count))
+
+})
+
 // function to format date from ISO standard to yyyy-mm-dd
 function formatDate(request){
   let startDate = new Date(request[1])
