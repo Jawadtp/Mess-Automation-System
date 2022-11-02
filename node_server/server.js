@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 const { json } = require('body-parser')
+const { request } = require('express')
 
 const app = express()
 const port = 5000
@@ -125,6 +126,10 @@ app.post('/get-leave-requests', parser, async (req, res) => {
   let managerId = req.body.managerID
   let requests = await db.getLeaveRequests(managerId)
 
+  // Convert ISO standard date format to yyyy-mm-dd
+  for (i in requests)
+    requests[i] = formatDate(requests[i])
+
   res.send(jsonify(requests))
 })
 
@@ -143,10 +148,21 @@ app.post('/submit-leave-request', parser, async (req, res) => {
 app.post('/update-leave-requests', parser, async (req, res) => {
   
   let rollNo = req.body.rollNo
-  let startDate = req.body.startDate
+  let startDate = req.body.startDate.slice(0,10)
   let status = req.body.status
   let message = db.updateLeaveRequests(rollNo, startDate, status)
 
   res.send(message)
 
 })
+
+// function to format date from ISO standard to yyyy-mm-dd
+function formatDate(request){
+  let startDate = new Date(request[1])
+  request[1] = startDate.getFullYear() + '-' + startDate.getDate()
+
+  let endDate = new Date(request[2])
+  request[2] = endDate.getFullYear() + '-' + (endDate.getMonth()+1) + '-' + endDate.getDate()
+
+  return request
+}

@@ -40,8 +40,8 @@ function LeaveRequests(props){
                                             
             return(<tr>
                 <td style={{minWidth: '7rem'}}>{request['roll_no']}</td>
-                <td style={{minWidth: '7rem'}} >{request['start_date'].slice(0,-17)}</td>
-                <td style={{minWidth: '7rem'}}>{request['end_date'].slice(0,-17)}</td>
+                <td style={{minWidth: '7rem'}} >{request['start_date']}</td>
+                <td style={{minWidth: '7rem'}}>{request['end_date']}</td>
                 <td style={{minWidth: '20rem'}}>{request['reason']}</td>
                 <td >
                     {request['status'] === 0? 

@@ -207,7 +207,7 @@ async function updateLeaveRequests(rollNo, startDate, status){
 
   await client.connect()
   try{
-    await client.query("UPDATE leave_requests SET status = $1 WHERE roll_no = $2 and start_date = $3", [rollNo, startDate, status])
+    await client.query("UPDATE leave_requests SET status = $1 WHERE roll_no = $2 and start_date = $3", [status, rollNo, startDate])
     await client.end()
     return 'Success'
   }catch(err) {
