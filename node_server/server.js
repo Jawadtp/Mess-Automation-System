@@ -184,6 +184,15 @@ app.post('/get-number-of-leaves', parser, async (req, res) => {
 
 })
 
+app.post('/get-student-info', parser, async (req, res) => {
+  
+  let managerId = req.body.managerID
+  let info = await db.getStudentInfo(managerId)
+
+  res.send(jsonify(info))
+
+})
+
 // function to format date from ISO standard to yyyy-mm-dd
 function formatDate(request){
   let startDate = new Date(request[1])

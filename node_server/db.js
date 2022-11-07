@@ -269,6 +269,26 @@ async function getNumberOfLeaves(rollNo){
   return leaves
 }
 
+async function getStudentInfo(managerId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess'
+  })
+
+  await client.connect()
+  try{
+    let messIdResult = await client.query("SELECT mess_id from managers where manager_id=$1", [managerId])
+
+    let infoResult = await client.query("SELECT u.roll_no,username,email FROM users u,students s WHERE u.roll_no = s.roll_no AND s.mess_id = $1",[messIdResult[0]])
+
+    let info = formatResult(infoResult)
+    return info
+  }catch(err){
+    console.log("Failed to fetch student details:", err)
+    return "Failed"
+  }
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -287,5 +307,6 @@ db.updateLeaveRequests = updateLeaveRequests
 db.getLeaveRequests = getLeaveRequests
 db.getFeesLastCalculated = getFeesLastCalculated
 db.getNumberOfLeaves = getNumberOfLeaves
+db.getStudentInfo = getStudentInfo
 
 module.exports = db
