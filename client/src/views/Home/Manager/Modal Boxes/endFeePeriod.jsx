@@ -19,7 +19,7 @@ function EndFeePeriod(props){
 
         const data = await response.json()
         console.log(data)
-        setFeesLastCalculated(data[0][0].slice(0,-12))
+        setFeesLastCalculated(data[0][0].slice(0,-14))
     }
 
     useEffect(() => getFeesLastCalculated(),'');

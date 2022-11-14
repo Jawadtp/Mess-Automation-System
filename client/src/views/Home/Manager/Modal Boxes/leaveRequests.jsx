@@ -20,22 +20,28 @@ function LeaveRequests(props){
         let response = await fetch('http://localhost:5000/get-leave-requests', requestOptions)
 
         const leaveRequests = await response.json();
-        let orderedLeaveRequests = leaveRequests.map((request) => {
-            return {
-                'roll_no': request[0],
-                'start_date': request[1],
-                'end_date': request[2],
-                'reason': request[3],
-                'status': request[4]
-            }
-        })
-        
-
-        setRequests(orderedLeaveRequests)
-        
+        if(leaveRequests.length == 0){
+            setRequests(undefined)
+        }else{
+            let orderedLeaveRequests = leaveRequests.map((request) => {
+                return {
+                    'roll_no': request[0],
+                    'start_date': request[1],
+                    'end_date': request[2],
+                    'reason': request[3],
+                    'status': request[4]
+                }
+            })
+            setRequests(orderedLeaveRequests)
+        }
     }
 
     function displayLeaveRequests(leaveRequests){
+        if (!leaveRequests){
+            return(<tr>
+                <td colSpan={5}><h6 style={{'color':'grey'}}>No leave requests to show</h6></td>
+            </tr>)
+        }
         return(leaveRequests.map( (request) => {
                                             
             return(<tr>

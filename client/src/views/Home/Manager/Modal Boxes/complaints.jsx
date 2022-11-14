@@ -21,8 +21,9 @@ function Complaints(props){
 
         const complaints = await response.json()
         // console.log(complaints)
-
-        setComplaints(complaints)
+        if (complaints.length == 0)
+            setComplaints(undefined)
+        else setComplaints(complaints)
         
     }
 
@@ -45,6 +46,11 @@ function Complaints(props){
     }
 
     function dislpayComplaints(complaints){
+        if(!complaints){
+            return(<tr>
+                <td colSpan={5}><h6 style={{'color':'grey'}}>No complaints to show</h6></td>
+            </tr>)
+        }
         return(complaints.map( (complaint) => {
                                             
             return(<tr>
