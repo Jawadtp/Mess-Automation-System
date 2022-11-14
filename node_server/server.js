@@ -69,7 +69,7 @@ app.all('/login', parser, async (req, res) => {
       let access_token = jwt.sign(email,key)
       res.send(jsonify({ access_token: access_token} ))
     }else{
-      
+
       res.send(jsonify({"error": "Invalid credentials"}))
   }
 
@@ -86,6 +86,17 @@ app.post('/announcements', parser, async (req, res) => {
   try{
     let announcements = await db.getAnnouncements(messId)
     res.send(jsonify(announcements))
+  }catch(err){
+    res.send(jsonify({"error": err}))
+  }
+})
+
+app.post('/post-announcement', parser, async (req, res) => {
+  let managerId = req.body.managerID
+  let announcement = req.body.announcement
+  try{
+    let status = await db.postAnnouncement(managerId, announcement)
+    res.send(jsonify(status))
   }catch(err){
     res.send(jsonify({"error": err}))
   }

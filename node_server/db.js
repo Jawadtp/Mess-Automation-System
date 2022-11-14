@@ -101,6 +101,25 @@ async function getAnnouncements(messId){
   return announcements
 }
 
+async function postAnnouncement(announcement, managerId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess', host: 'localhost'
+  })
+
+  await client.connect()
+
+  try{
+    await client.query("INSERT INTO announcements (roll_no,announcement) VALUES ($1,$2)", [announcement, managerId])
+    await client.end()
+    return 'Success'
+  }catch(err){
+    console.log("Failed to insert announcement:\n",err)
+    await client.end()
+    return 'Failed'
+  }
+}
+
 async function getMessMealDetails(messId){
   const client = new Client({
     user: 'SinadShan',
@@ -312,5 +331,6 @@ db.getLeaveRequests = getLeaveRequests
 db.getFeesLastCalculated = getFeesLastCalculated
 db.getNumberOfLeaves = getNumberOfLeaves
 db.getStudentInfo = getStudentInfo
+db.postAnnouncement = postAnnouncement
 
 module.exports = db
