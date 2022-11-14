@@ -43,8 +43,12 @@ async function doesUserExist(email, password){
   
   let user = formatResult(user_result)
 
-  await client.end()
-  return user
+  if (user[0][0]){
+    await client.end()
+    return user
+  }else{
+    return 'error'
+  }
 }
 
 async function getUserInfoFromEmail(email){

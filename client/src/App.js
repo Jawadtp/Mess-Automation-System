@@ -13,8 +13,8 @@ const App = () => {
   useEffect(() => 
   {
     const token = localStorage.getItem('token')
-
-    validateToken(token)
+    if(token)
+      validateToken(token)
   })
 
   async function validateToken(token)

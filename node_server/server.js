@@ -38,7 +38,7 @@ app.get('/validate', async (req, res) => {
   let email = jwt.decode(token)
   if (email){
     let userInfo = await db.getUserInfoFromEmail(email)
-
+    if(userInfo){
       let userMess = await db.getUserMessFromEmail(email,userInfo[3])
       // If user is not registered to any mess
       if (!userMess) userMess = ['', 999]
@@ -46,6 +46,9 @@ app.get('/validate', async (req, res) => {
       userInfo = { 'rollno': userInfo[0], 'name': userInfo[1], 'email': userInfo[2], 'role': userInfo[3], 'messname': userMess[0], 'messid': userMess[1] }
       
       res.send(jsonify(userInfo))
+    }else{
+      res.status(401).send(jsonify({'error': 'Invalid token'}))
+    }
   }
 
   // need to send response when token not present
@@ -54,21 +57,20 @@ app.get('/validate', async (req, res) => {
 })
 
 
-app.all('/login', parser, (req, res) => {
+app.all('/login', parser, async (req, res) => {
   let email = req.body.email
   let password = req.body.password
 
-  try{
-    let userExists = db.doesUserExist(email, password)
-
-    if(userExists){
+  
+    let userExists = await db.doesUserExist(email, password)
+    
+    if(userExists!=='error'){
       let key = process.env.SECRET_KEY
       let access_token = jwt.sign(email,key)
       res.send(jsonify({ access_token: access_token} ))
-    }
-  }catch(err){
-    console.log(err)
-    res.send(jsonify({"error": "Invalid credentials"}))
+    }else{
+      
+      res.send(jsonify({"error": "Invalid credentials"}))
   }
 
 })
