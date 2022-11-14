@@ -305,10 +305,40 @@ async function getStudentInfo(managerId){
     let infoResult = await client.query("SELECT u.roll_no,username,email FROM users u,students s WHERE u.roll_no = s.roll_no AND s.mess_id = $1",[messId[0][0]])
 
     let info = formatResult(infoResult)
+    await client.end()
     return info
   }catch(err){
     console.log("Failed to fetch student details:", err)
+    await client.end()
     return "Failed"
+  }
+}
+
+async function addExtras(rollNo, extras, managerId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess', host: 'localhost'
+  })
+
+  await client.connect()
+  try{
+    let messIdResults = await client.query("SELECT mess_id from managers where manager_id=$1",[managerId])
+    let messId = formatResult(messIdResults)
+
+    let studentMessIdResults = await client.query("SELECT mess_id from students where roll_no=upper($1)", [rollNo])
+    let studentMessId = formatResult(studentMessIdResults)
+
+    if (!studentMessId[0] || (studentMessId[0][0] != messId[0][0]))
+      return 'Invalid roll number'
+
+    await client.query("UPDATE fees SET extras=extras+$1 where roll_no=upper($2)", [extras,rollNo])
+    
+    await client.end()
+    return 'Added Rs.'+extras+' for '+rollNo
+  }catch(err){
+    console.log("Failed to add extra:\n",err)
+    await client.end()
+    return 'Error'
   }
 }
 
@@ -332,5 +362,6 @@ db.getFeesLastCalculated = getFeesLastCalculated
 db.getNumberOfLeaves = getNumberOfLeaves
 db.getStudentInfo = getStudentInfo
 db.postAnnouncement = postAnnouncement
+db.addExtras = addExtras
 
 module.exports = db
