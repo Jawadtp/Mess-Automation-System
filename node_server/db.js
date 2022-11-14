@@ -17,7 +17,7 @@ async function getMesses(){
 
     const client = new Client({
       user: 'SinadShan',
-      database: 'mess'
+      database: 'mess', host: 'localhost', host: 'localhost'
     })
 
     await client.connect()
@@ -34,7 +34,7 @@ async function getMesses(){
 async function doesUserExist(email, password){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -50,7 +50,7 @@ async function doesUserExist(email, password){
 async function getUserInfoFromEmail(email){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -65,7 +65,7 @@ async function getUserInfoFromEmail(email){
 async function getUserMessFromEmail(email, role){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -86,7 +86,7 @@ async function getUserMessFromEmail(email, role){
 async function getAnnouncements(messId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -100,7 +100,7 @@ async function getAnnouncements(messId){
 async function getMessMealDetails(messId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -114,7 +114,7 @@ async function getMessMealDetails(messId){
 async function getMessDetails(messId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -128,7 +128,7 @@ async function getMessDetails(messId){
 async function getMessStudentCount(messId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -142,7 +142,7 @@ async function getMessStudentCount(messId){
 async function getComplaints(messId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -158,7 +158,7 @@ async function getComplaints(messId){
 async function addComplaint(rollNo, messId, complaint){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -180,7 +180,7 @@ async function addComplaint(rollNo, messId, complaint){
 async function insertLeaveReq(rollNo, startDate, endDate, reason){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -202,7 +202,7 @@ async function insertLeaveReq(rollNo, startDate, endDate, reason){
 async function updateLeaveRequests(rollNo, startDate, status){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -220,7 +220,7 @@ async function updateLeaveRequests(rollNo, startDate, status){
 async function getLeaveRequests(managerId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -242,7 +242,7 @@ async function getLeaveRequests(managerId){
 async function getFeesLastCalculated(messId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -257,7 +257,7 @@ async function getFeesLastCalculated(messId){
 async function getNumberOfLeaves(rollNo){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
@@ -272,14 +272,14 @@ async function getNumberOfLeaves(rollNo){
 async function getStudentInfo(managerId){
   const client = new Client({
     user: 'SinadShan',
-    database: 'mess'
+    database: 'mess', host: 'localhost'
   })
 
   await client.connect()
   try{
     let messIdResult = await client.query("SELECT mess_id from managers where manager_id=$1", [managerId])
-
-    let infoResult = await client.query("SELECT u.roll_no,username,email FROM users u,students s WHERE u.roll_no = s.roll_no AND s.mess_id = $1",[messIdResult[0]])
+    let messId = formatResult(messIdResult)
+    let infoResult = await client.query("SELECT u.roll_no,username,email FROM users u,students s WHERE u.roll_no = s.roll_no AND s.mess_id = $1",[messId[0][0]])
 
     let info = formatResult(infoResult)
     return info
