@@ -342,6 +342,49 @@ async function addExtras(rollNo, extras, managerId){
   }
 }
 
+async function getFeesDetails(rollNo){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess', host: 'localhost'
+  })
+
+  await client.connect()
+  try{
+    let infoResults = await client.query("SELECT f.pending_fees, f.extras, s.noofleaves FROM fees f, students s WHERE s.roll_no = $1 and s.roll_no = f.roll_no",[rollNo])
+
+    let info = formatResult(infoResults)
+    info = info[0]
+
+    await client.end()
+    return info
+  }catch(err){
+    console.log("Error fetching fees details:\n", err)
+    await client.end()
+    return 'Error'
+  }
+}
+
+async function getMessRate(messId){
+  const client = new Client({
+    user: 'SinadShan',
+    database: 'mess', host: 'localhost'
+  })
+
+  await client.connect()
+  try{
+    let messRateInfo = await client.query("SELECT rate FROM mess where mess_id = $1",[messId]) 
+    let messRate = formatResult(messRateInfo)
+    messRate = messRate[0]
+
+    await client.end()
+    return messRate
+  }catch(err){
+    console.log("Error fetching mess rate:\n", err)
+    await client.end()
+    return 'Error'
+  }
+}
+
 let db = {};
 
 // Add all functions to property of object db
@@ -363,5 +406,7 @@ db.getNumberOfLeaves = getNumberOfLeaves
 db.getStudentInfo = getStudentInfo
 db.postAnnouncement = postAnnouncement
 db.addExtras = addExtras
+db.getFeesDetails = getFeesDetails
+db. getMessRate = getMessRate
 
 module.exports = db

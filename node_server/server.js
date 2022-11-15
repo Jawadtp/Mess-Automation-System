@@ -217,6 +217,17 @@ app.post('/add-extras', parser, async (req, res) => {
   
 })
 
+app.post('/get-fees-details', parser, async (req, res) => {
+
+  let rollNo = req.body.rollNo
+  let messId = req.body.messID
+  let info = []
+  info.push(await db.getFeesDetails(rollNo))
+  info.push(await db.getMessRate(messId))
+  
+  res.send(jsonify(info))
+})
+
 // function to format date from ISO standard to yyyy-mm-dd
 function formatDate(request){
   let startDate = new Date(request[1])
